@@ -16,7 +16,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
-    //SetMouseDispFlag(false);
+    SetMouseDispFlag(false);
 
     // •`‰ææ‚ğ— ‰æ–Ê‚É•ÏX
     SetDrawScreen(DX_SCREEN_BACK);

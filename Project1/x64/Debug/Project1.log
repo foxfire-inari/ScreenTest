@@ -1,6 +1,10 @@
 ﻿  Camera.cpp
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(36,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(36,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(36,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(36,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(60,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(60,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(60,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(60,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(81,29): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(82,30): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(102,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(102,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   Project1.vcxproj -> C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\x64\Debug\Project1.exe

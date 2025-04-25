@@ -13,7 +13,7 @@ _inline Vector3D VECTransform(const Vector3D& _vec, const Matrix& _mat)
 }
 
 /// <summary>
-/// カメラを回転移動させる関数
+/// Z軸以外の回転移動をさせる関数
 /// </summary>
 /// <param name="_location">座標ベクトル</param>
 /// <param name="_rotation">回転情報</param>
