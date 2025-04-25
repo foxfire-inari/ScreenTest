@@ -35,9 +35,9 @@ void Camera::Draw(std::vector< std::vector<Vector3D>> _worldpos)
 		//ê¸ï™Çï`âÊ
 		DrawLine(scpos[0].x, scpos[0].y,scpos[1].x, scpos[1].y,GetColor(255, 255, 255));
 
-		DrawFormatString(0, 32+32 * i, GetColor(255, 255, 255),
-			"SLine:(%f,%f) ELine:(%f,%f)",
-			scpos[0].x, scpos[0].y, scpos[1].x, scpos[1].y);
+		//DrawFormatString(0, 32+32 * i, GetColor(255, 255, 255),
+		//	"SLine:(%f,%f) ELine:(%f,%f)",
+		//	scpos[0].x, scpos[0].y, scpos[1].x, scpos[1].y);
 
 		scpos.clear();
 	}
