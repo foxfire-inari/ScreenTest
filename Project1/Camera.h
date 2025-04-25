@@ -6,12 +6,20 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Draw(std::vector< std::vector<Vector3D>> _worldvec);
+	void Draw(std::vector< std::vector<Vector3D>> _worldpos);
 	void Update();
+
+	Vector3D GetPosition() { return position; }
+	Vector3D GetScreenPos() { return screenPos; }
+	Vector3D GetRotation() { return rotation; }
 
 private:
 	//カメラの座標
-	Vector3D location;
+	Vector3D position;
+
+	//スクリーンの座標
+	Vector3D screenPos;
+
 
 	//カメラの回転(向き)
 	Vector3D rotation;

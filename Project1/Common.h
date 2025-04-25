@@ -15,7 +15,10 @@ namespace
     static const float WINDOW_WIDTH = 800.f;    //横幅
     static const float WINDOW_HEIGHT = 600.f;   //縦幅
 
-
     //回転
     static const float ONE_DEGREE = PI / 180.0f;               //1度
+
+    //視点からスクリーンまでの距離
+    static const float SCREEN = 500.f;
+
 }

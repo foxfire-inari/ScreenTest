@@ -3,8 +3,6 @@
 
 namespace
 {
-	//視点からスクリーンまでの距離
-	static const float SCREEN = 1000.f;
 
 	//カメラの移動速度
 	static const float MOVE_SPEED = 2.5f;
@@ -23,7 +21,8 @@ namespace
 
 
 Camera::Camera()
-	:location{ 0,0,-SCREEN-100 }
+	:position{ 0,0,0 }
+	,screenPos{0,0,-SCREEN}
 	, rotation{ 0,0,0 }
 {
 }
@@ -38,16 +37,13 @@ void Camera::Draw(std::vector< std::vector<Vector3D>> _worldpos)
 	std::vector<Vector3D> scpos;
 	bool isInScreen[2] = { false,false };
 
-	//スクリーンのワールド座標
-	Vector3D camsc = location;
-	camsc.z += SCREEN;
-	DrawFormatString(0, 0, GetColor(255, 255, 255),
-		"CameraLocation:(%f,%f,%f)", camsc.x, camsc.y, camsc.z);
+	//DrawFormatString(0, 0, GetColor(255, 255, 255),
+	//	"CameraLocation:(%f,%f,%f)", camsc.x, camsc.y, camsc.z);
 
 	for (int i = 0; i < _worldpos.size(); i++)
 	{
-		isInScreen[0] = _worldpos[i][0].z > camsc.z;
-		isInScreen[1] = _worldpos[i][1].z > camsc.z;
+		isInScreen[0] = _worldpos[i][0].z < position.z;
+		isInScreen[1] = _worldpos[i][1].z < position.z;
 		if (isInScreen[0] == false && isInScreen[1] == false)continue;
 
 		for (int j = 0; j < _worldpos[i].size(); j++)
@@ -59,9 +55,9 @@ void Camera::Draw(std::vector< std::vector<Vector3D>> _worldpos)
 		//線分を描画
 		DrawLine(scpos[0].x, scpos[0].y,scpos[1].x, scpos[1].y,GetColor(255, 255, 255));
 
-		DrawFormatString(0, 32+32 * i, GetColor(255, 255, 255),
-			"SLine:(%f,%f) ELine:(%f,%f)",
-			scpos[0].x, scpos[0].y, scpos[1].x, scpos[1].y);
+		//DrawFormatString(0, 32+32 * i, GetColor(255, 255, 255),
+		//	"SLine:(%f,%f) ELine:(%f,%f)",
+		//	scpos[0].x, scpos[0].y, scpos[1].x, scpos[1].y);
 
 		scpos.clear();
 
@@ -91,12 +87,15 @@ void Camera::Update()
 	if (rotation.y > MAX_H)	rotation.y -= MAX_H;
 	if (rotation.y < MIN_H)	rotation.y += MAX_H;
 
-	if (CheckHitKey(KEY_INPUT_W))location.z += MOVE_SPEED;
-	if (CheckHitKey(KEY_INPUT_S))location.z -= MOVE_SPEED;
-	if (CheckHitKey(KEY_INPUT_D))location.x += MOVE_SPEED;
-	if (CheckHitKey(KEY_INPUT_A))location.x -= MOVE_SPEED;
-	if (CheckHitKey(KEY_INPUT_E))location.y += MOVE_SPEED;
-	if (CheckHitKey(KEY_INPUT_Q))location.y -= MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_W))position.z += MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_S))position.z -= MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_D))position.x += MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_A))position.x -= MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_E))position.y += MOVE_SPEED;
+	if (CheckHitKey(KEY_INPUT_Q))position.y -= MOVE_SPEED;
+
+	screenPos = position;
+	screenPos.z -= SCREEN;
 
 	//マウスの座標を固定
 	SetMousePoint(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
@@ -105,8 +104,8 @@ void Camera::Update()
 
 Vector3D Camera::GetScreenPos(Vector3D _worldPos)
 {
-	//カメラの座標を加算して
-	Vector3D worldPos = _worldPos + location;
+	//カメラの座標で減算して
+	Vector3D worldPos = _worldPos - position;
 
 	//スクリーンまでの距離をワールド座標で割る
 	float scDis = SCREEN / worldPos.z;

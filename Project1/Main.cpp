@@ -1,6 +1,7 @@
 #include "Common.h"
 #include "DxLib.h"
 #include "Camera.h"
+#include "TopAngle.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -91,6 +92,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     Camera* camera = new Camera();
+    
+    TopAngle* topangle = new TopAngle(camera);
 
     // ウインドウが閉じられるかエスケープキーが押されるまでループ
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -101,6 +104,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         camera->Update();
         camera->Draw(worldLine);
 
+        topangle->Draw(worldLine);
 
         // 裏画面の内容を表画面に反映
         ScreenFlip();
