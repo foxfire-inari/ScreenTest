@@ -21,7 +21,7 @@ namespace
 
 
 Camera::Camera()
-	:position{ 0,0,0 }
+	:position{ 0,0,1000 }
 	,screenPos{0,0,-SCREEN}
 	, rotation{ 0,0,0 }
 {
