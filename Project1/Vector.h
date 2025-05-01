@@ -1,5 +1,8 @@
 #pragma once
 #include <math.h>
+#include <assert.h>
+
+//インライン関数：短い関数を通常より早く実行できる。
 
 /// <summary>
 /// 三次元ベクトル
@@ -42,7 +45,7 @@ struct Vector3D
 	float LengthSq() { return sqrtf(Length()); }
 
 	/// <summary>
-	/// 自信を正規化
+	/// 自身を正規化
 	/// </summary>
 	void Normalize()
 	{
@@ -64,22 +67,52 @@ struct Vector3D
 		else { x = 0; y = 0; x = 0; }
 	}
 
+	/// <summary>
+	/// 自身を正規化したときのベクトルを生成して返す
+	/// </summary>
+	/// <returns>正規化されたベクトル</returns>
+	Vector3D Normalized() const
+	{
+		//自分のコピーを作成
+		Vector3D result = *this;
+		//コピーを正規化
+		result.Normalize();
+		//正規化されたコピーを返す
+		return result;
+	}
+
 };
 
-//インライン関数：短い関数を通常より早く実行できる。
+/// <summary>
+/// ベクトルの内積を求める
+/// </summary>
+/// <param name="aVec">同じ始点を持つベクトルa</param>
+/// <param name="bVec">同じ始点を持つベクトルb</param>
+/// <returns>内積</returns>
+inline float Dot(const Vector3D aVec, const Vector3D bVec)
+{
+	return aVec.x*bVec.x + aVec.y*bVec.y + aVec.z*bVec.z;
+}
 
 /// <summary>
-/// ベクトルを作成する
+/// ベクトルの外積を求める
 /// </summary>
-/// <param name="_x">X座標</param>
-/// <param name="_y">Y座標</param>
-/// <param name="_z">Z座標</param>
-/// <returns>作成されたベクトル</returns>
-_inline Vector3D SetVec3D(float _x,float _y,float _z)
+/// <param name="rightVec">右辺にあたるベクトル</param>
+/// <param name="leftVec">左辺にあたるベクトル</param>
+/// <returns>外積</returns>
+static Vector3D Cross(const Vector3D rightVec, const Vector3D leftVec)
 {
 	Vector3D result;
-	result.x = _x;
-	result.y = _y;
-	result.z = _z;
+	result.x = rightVec.y*leftVec.z - rightVec.z*leftVec.y;
+	result.y = rightVec.z*leftVec.x - rightVec.x*leftVec.z;
+	result.z = rightVec.x*leftVec.y - rightVec.y*leftVec.x;
 	return result;
+}
+
+static float AngleOfVector(const Vector3D aVec, const Vector3D bVec)
+{
+	Vector3D aLength = aVec.Normalized();
+	Vector3D bLength = bVec.Normalized();
+	assert
+
 }
