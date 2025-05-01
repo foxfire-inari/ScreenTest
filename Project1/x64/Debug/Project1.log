@@ -1,10 +1,45 @@
 ﻿  Camera.cpp
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(56,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(56,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(56,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(56,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(77,29): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(78,30): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(101,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Camera.cpp(101,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  Project1.vcxproj -> C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\x64\Debug\Project1.exe
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(77,29): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(78,30): warning C4244: '-=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(101,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(101,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  Main.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(10,32): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(10,18): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  TopAngle.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(31,28): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(31,16): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(32,38): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(32,26): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(32,11): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(33,39): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(33,27): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(33,14): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(40,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(40,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(41,50): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(41,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(41,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(41,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(47,74): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(47,40): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(47,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(47,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(48,74): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(48,40): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(48,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(48,17): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(49,101): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(49,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(49,54): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(49,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,56): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  Project1.vcxproj -> C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\x64\Debug\Project1.exe
