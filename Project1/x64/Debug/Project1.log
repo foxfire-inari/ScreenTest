@@ -1,4 +1,5 @@
 ﻿  Camera.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Vector.h(131,17): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,55): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(56,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
@@ -8,9 +9,35 @@ C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Came
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(101,48): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Camera.cpp(101,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   Main.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Vector.h(131,17): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(10,32): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(10,18): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(30,37): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(31,37): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(34,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(35,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(38,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(39,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(42,37): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(43,37): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(46,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(47,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(50,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(51,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(54,34): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(55,34): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(58,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(59,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(62,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(63,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(66,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(67,35): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(70,34): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(71,34): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(74,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Main.cpp(75,36): error C3861: 'SetVec3D': 識別子が見つかりませんでした
   TopAngle.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Vector.h(131,17): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(31,28): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(31,16): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(32,38): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
@@ -42,4 +69,3 @@ C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopA
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\TopAngle.cpp(65,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   コードを生成中...
-  Project1.vcxproj -> C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\x64\Debug\Project1.exe

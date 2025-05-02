@@ -36,13 +36,13 @@ struct Vector3D
 	///（平方根の計算は負荷が大きいため、長さの比較はこれを使う）
 	/// </summary>
 	/// <returns>比較用の長さ</returns>
-	float Length() { return x*x + y*y + z*z; }
+	float Length()const { return x*x + y*y + z*z; }
 
 	/// <summary>
 	/// ベクトルの長さを取得
 	/// </summary>
 	/// <returns>ベクトルの長さ</returns>
-	float LengthSq() { return sqrtf(Length()); }
+	float LengthSq()const { return sqrtf(Length()); }
 
 	/// <summary>
 	/// 自身を正規化
@@ -71,7 +71,7 @@ struct Vector3D
 	/// 自身を正規化したときのベクトルを生成して返す
 	/// </summary>
 	/// <returns>正規化されたベクトル</returns>
-	Vector3D Normalized() const
+	Vector3D Normalized()const
 	{
 		//自分のコピーを作成
 		Vector3D result = *this;
@@ -109,10 +109,26 @@ static Vector3D Cross(const Vector3D rightVec, const Vector3D leftVec)
 	return result;
 }
 
+/// <summary>
+/// ベクトルのなす角を求める
+/// </summary>
+/// <param name="aVec">ベクトルa</param>
+/// <param name="bVec">ベクトルb</param>
+/// <returns>角度 (ラジアン)</returns>
 static float AngleOfVector(const Vector3D aVec, const Vector3D bVec)
 {
-	Vector3D aLength = aVec.Normalized();
-	Vector3D bLength = bVec.Normalized();
-	assert
+	assert(aVec.Length() == 0 ||
+		   bVec.Length() == 0);
 
+	//それぞれベクトルの長さを求める
+	float aLength = aVec.LengthSq();
+	float bLength = bVec.LengthSq();
+
+	//cosθを求める
+	float angle = Dot(aVec, bVec) / (aLength * bLength);
+
+	//θ（ラジアン）を求める
+	float radAngle = acos(angle);
+
+	return radAngle;
 }
