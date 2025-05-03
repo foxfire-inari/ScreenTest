@@ -86,11 +86,12 @@ static Matrix Perspective(float viewVer, float aspect, float near, float far)
 	float zOffset = -2 * far * near * (zRange / (far + near));
 
 	//行列の要素をセット
-	result.m[0][0] = xScale;	//
-	result.m[1][1] = yScale;	//
+	result.m[0][0] = xScale;	
+	result.m[1][1] = yScale;	
 	result.m[2][2] = zRange;	//Z値を[0,1]の範囲に近づける
 	result.m[2][3] = 1.0f;		//WにZ値をコピーするため
 	result.m[3][2] = zOffset;	//奥行きに関わる計算
 
 	return result;
 }
+//実際は式を省略できるらしいが、後学のために省略をせず表す。

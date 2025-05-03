@@ -32,17 +32,17 @@ struct Vector3D
 
 
 	/// <summary>
-	/// 比較用の長さを取得
+	/// 比較用の長さを取得（長さの二乗を求める）
 	///（平方根の計算は負荷が大きいため、長さの比較はこれを使う）
 	/// </summary>
 	/// <returns>比較用の長さ</returns>
-	float Length()const { return x*x + y*y + z*z; }
+	float LengthSq()const { return x*x + y*y + z*z; }
 
 	/// <summary>
 	/// ベクトルの長さを取得
 	/// </summary>
 	/// <returns>ベクトルの長さ</returns>
-	float LengthSq()const { return sqrtf(Length()); }
+	float Length()const { return sqrtf(LengthSq()); }
 
 	/// <summary>
 	/// 自身を正規化
@@ -50,7 +50,7 @@ struct Vector3D
 	void Normalize()
 	{
 		//自身の長さを取得
-		float length = LengthSq();
+		float length = Length();
 
 		//float型が正確に表現できる桁（23ビット≒7桁）
 		//非常に小さい値より大きいかを確認してから計算する（０除算をしないため）
@@ -117,12 +117,12 @@ static Vector3D Cross(const Vector3D rightVec, const Vector3D leftVec)
 /// <returns>角度 (ラジアン)</returns>
 static float AngleOfVector(const Vector3D aVec, const Vector3D bVec)
 {
-	assert(aVec.Length() == 0 ||
-		   bVec.Length() == 0);
+	assert(aVec.LengthSq() == 0 ||
+		   bVec.LengthSq() == 0);
 
 	//それぞれベクトルの長さを求める
-	float aLength = aVec.LengthSq();
-	float bLength = bVec.LengthSq();
+	float aLength = aVec.Length();
+	float bLength = bVec.Length();
 
 	//cosθを求める
 	float angle = Dot(aVec, bVec) / (aLength * bLength);
