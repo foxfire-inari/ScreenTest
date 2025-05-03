@@ -34,7 +34,7 @@ struct Quaternion
 	static Quaternion Identity() { return Quaternion(0.0f, 0.0f, 0.0f, 1.0f); }
 
     /// <summary>
-    /// axisをangleだけ回転するクオータニオンを生成
+    /// axisを軸にangleだけ回転するクオータニオンを生成
     /// </summary>
     /// <param name="axis">軸</param>
     /// <param name="angle">回転量（ラジアン）</param>
@@ -55,7 +55,90 @@ struct Quaternion
         return result;
     }
 
-	//続きはここから
+	/// <summary>
+	/// クォータニオンの乗算
+	/// </summary>
+	/// <param name="qua">クォータニオン</param>
+	/// <returns>this*qua</returns>
+	Quaternion operator*(const Quaternion& qua)const
+	{
+		Quaternion result;
+		result.w = w * qua.w - x * qua.x - y * qua.y - z * qua.z;
+		result.x = w * qua.x + x * qua.w + y * qua.z - z * qua.y;
+		result.y = w * qua.y - x * qua.z + y * qua.w + z * qua.x;
+		result.z = w * qua.z + x * qua.y - y * qua.x + z * qua.w;
+		return result;
+	}
+
+	/// <summary>
+	/// クォータニオンの乗算
+	/// </summary>
+	/// <param name="qua">クォータニオン</param>
+	/// <returns>this*qua</returns>
+	Quaternion& operator*=(const Quaternion& qua)
+	{
+		*this = *this * qua;
+		return *this;
+	}
+
+	/// <summary>
+	/// 比較用の長さを取得（長さの二乗を求める）
+	///（平方根の計算は負荷が大きいため、長さの比較はこれを使う）
+	/// </summary>
+	/// <returns>比較用の長さ</returns>
+	float LengthSq()const { return x * x + y * y + z * z + w * w; }
+
+	/// <summary>
+	/// クォータニオンの長さを取得
+	/// </summary>
+	/// <returns>ベクトルの長さ</returns>
+	float Length()const { return sqrtf(LengthSq()); }
+
+	/// <summary>
+	/// 自身を正規化
+	/// </summary>
+	void Normalize()
+	{
+		//自身の長さを取得
+		float length = Length();
+
+		//float型が正確に表現できる桁（23ビット≒7桁）
+		//非常に小さい値より大きいかを確認してから計算する（０除算をしないため）
+		if (length > 1e-12f)
+		{
+			//除算と乗算では除算の方が負荷が大きいため、逆数を取得しておく
+			float invLen = 1.0f / length;
+
+			x *= invLen;
+			y *= invLen;
+			z *= invLen;
+			w *= invLen;
+		}
+		//非常に小さい値なら単位クォータニオンにする
+		else { *this = Identity(); }
+	}
+
+	/// <summary>
+	/// 自身を正規化したときのクォータニオンを生成して返す
+	/// </summary>
+	/// <returns>正規化されたクォータニオン</returns>
+	Quaternion Normalized()const
+	{
+		//自分のコピーを作成
+		Quaternion result = *this;
+		//コピーを正規化
+		result.Normalize();
+		//正規化されたコピーを返す
+		return result;
+	}
+
+	/// <summary>
+	/// 共役クォータニオンを生成して返す
+	/// </summary>
+	/// <returns>共役クォータニオン</returns>
+	Quaternion Conjugate() const { return Quaternion(-x, -y, z, w); }
+
+	//次はここから
 
 };
 
