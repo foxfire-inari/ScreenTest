@@ -148,6 +148,7 @@
     <ClInclude Include="CameraMath.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="TopAngle.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>

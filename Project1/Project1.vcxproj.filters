@@ -47,5 +47,8 @@
     <ClInclude Include="TopAngle.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>3DMath</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -39,76 +39,6 @@ struct Matrix
 };
 
 /// <summary>
-/// X軸の回転行列を生成する関数
-/// （左手座標系）
-/// </summary>
-/// <param name="XAxisRotation">角度（ラジアン）</param>
-/// <returns>X軸回転行列</returns>
-static Matrix GetMatrixAxisX(float XAxisRotation)
-{
-	float sin = sinf(XAxisRotation);
-	float cos = cosf(XAxisRotation);
-
-	//単位行列を作成
-	Matrix result = Matrix::Identity();
-	//回転行列の要素を設定
-	result.m[1][1] =  cos; result.m[1][2] = sin;
-	result.m[2][1] = -sin; result.m[2][2] = cos;
-
-	//{ 1.0f, 0.0f, 0.0f, 0.0f }
-	//{ 0.0f,  cos,  sin, 0.0f }
-	//{ 0.0f, -sin,  cos, 0.0f }
-	//{ 0.0f, 0.0f, 0.0f, 1.0f }
-
-	return result;
-}
-
-/// <summary>
-/// Y軸の回転行列を生成する関数
-/// （左手座標系）
-/// </summary>
-/// <param name="YAxisRotation">角度（ラジアン）</param>
-/// <returns>Y軸回転行列</returns>
-static Matrix GetMatrixAxisY(float YAxisRotation)
-{
-	float sin = sinf(YAxisRotation);
-	float cos = cosf(YAxisRotation);
-
-	//単位行列を作成
-	Matrix result = Matrix::Identity();
-	//回転行列の要素を設定
-	result.m[0][0] =  cos; result.m[0][2] = sin;
-	result.m[2][0] = -sin; result.m[2][2] = cos;
-
-	// {  cos, 0.0f, -sin, 0.0f}
-	// { 0.0f, 1.0f, 0.0f, 0.0f}
-	// {  sin, 0.0f,  cos, 0.0f}
-	// { 0.0f, 0.0f, 0.0f, 1.0f}
-
-	return result;
-}
-
-/// <summary>
-/// Z軸の回転行列を再生する関数
-/// （左手座標系）
-/// </summary>
-/// <param name="ZAxisRotation">角度（ラジアン）</param>
-/// <returns>Z軸回転行列</returns>
-static Matrix GetMatrixAxisZ(float ZAxisRotation)
-{
-	float sin = sinf(ZAxisRotation);
-	float cos = cosf(ZAxisRotation);
-
-	//単位行列を作成
-	Matrix result = Matrix::Identity();
-	//回転行列の要素を設定
-	result.m[0][0] = cos; result.m[0][1] = -sin;
-	result.m[1][0] = sin; result.m[1][1] = cos;
-
-	return result;
-}
-
-/// <summary>
 /// 行列の乗算
 /// </summary>
 /// <param name="second">後に計算される行列</param>
@@ -130,4 +60,37 @@ static Matrix MartixMultiply(const Matrix& second, const Matrix& first)
 	return result;
 }
 
-//------------------ここから開始する
+/// <summary>
+/// 透視投影行列を作成
+/// （左手座標系）
+/// </summary>
+/// <param name="viewVer">垂直方向の視野角（ラジアン）</param>
+/// <param name="aspect">アスペクト比（幅/高さ）</param>
+/// <param name="near">最前面までの距離</param>
+/// <param name="far">最奥面までの距離</param>
+/// <returns>透視投影行列</returns>
+static Matrix Perspective(float viewVer, float aspect, float near, float far)
+{
+	//アス比、最前面までの距離が適切な数値か、最奥面が最前面より手前に来ていないか
+	assert(aspect <= 0.0f || near <= 0.0f || far <= near);
+
+	//新しく行列を作る
+	Matrix result;
+	//Y方向の拡大
+	float yScale = 1.0f / tanf(viewVer / 2.0f);
+	//X方向の拡大
+	float xScale = yScale / aspect;
+	//Z方向の係数
+	float zRange = (far + near) / (far - near);
+	//Z座標の変換係数
+	float zOffset = -2 * far * near * (zRange / (far + near));
+
+	//行列の要素をセット
+	result.m[0][0] = xScale;	//
+	result.m[1][1] = yScale;	//
+	result.m[2][2] = zRange;	//Z値を[0,1]の範囲に近づける
+	result.m[2][3] = 1.0f;		//WにZ値をコピーするため
+	result.m[3][2] = zOffset;	//奥行きに関わる計算
+
+	return result;
+}
