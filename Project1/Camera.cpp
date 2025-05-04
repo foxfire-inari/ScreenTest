@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "DxLib.h"
 #include "CameraMath.h"
+#include <assert.h>
 
 
 namespace
@@ -56,11 +57,11 @@ namespace
 		// 上下左右表裏で比較し、外側にあったら対応するビットを立てる
 
 		//同時に起こりえないのでelseでまとめる
-		if (p.x < -p.w) { code |= LEFT; }
-		else if (p.x > p.w) { code |= RIGHT; }
-
 		if (p.y < -p.w) { code |= BOTTOM; }
 		else if (p.y > p.w) { code |= TOP; }
+
+		if (p.x < -p.w) { code |= LEFT; }
+		else if (p.x > p.w) { code |= RIGHT; }
 
 		if (p.z < 0.0f) { code |= OUTCODE_NEAR; }
 		else if (p.z > p.w) { code |= OUTCODE_FAR; }
@@ -68,6 +69,12 @@ namespace
 		return code;
 	}
 
+	/// <summary>
+	/// Cohen-Sutherlandアルゴリズムを使用したクリッピング関数
+	/// </summary>
+	/// <param name="startClip">線形変換時の始点</param>
+	/// <param name="endClip">線形変換時の終点</param>
+	/// <returns>描画されるか</returns>
 	bool ClipLineCohenSutherland(Vector4D& startClip, Vector4D& endClip)
 	{
 		//始点終点のアウトコードをセット
@@ -76,23 +83,144 @@ namespace
 
 		//floatの誤差により無限ループが発生してしまうのを防ぐため
 		const int MAX_ITERATIONS = 10;
+		//現在の反復回数
+		int iterations = 0;
 
+		while (iterations < MAX_ITERATIONS)
+		{
+			iterations++;
+
+			//ビットorをして0なら両端が内側にある
+			if ((startOutcode | endOutcode) == 0)
+			{
+				//線分全体を表示
+				return true;
+			}
+			//両端点が同じ外部領域（右側や下側等）なら表示されない
+			else if ((startOutcode & endOutcode) != 0)
+			{
+				return false;
+			}
+			//クリッピングが必要な場合
+			else
+			{
+				//外側にある方の点のアウトコードを選択
+				int outsideCode = (startOutcode != 0) ? startOutcode : endOutcode;
+				
+				//矩形との交点が直線startClipendClipのどの範囲にあるか
+				//（0.0f<t<1.0f）の場合は線分startClipendClipのどこか
+				float t = 0.0f;
+
+				//交点の座標
+				Vector4D intersection;
+				
+				//線分の方向ベクトル
+				Vector4D direction = {
+					endClip.x - startClip.x,
+					endClip.y - startClip.y,
+					endClip.z - startClip.z,
+					endClip.w - startClip.w
+				};
+				
+				//割り算の分母
+				float denominator;
+
+				//outsideCodeに対する境界平面（描画される範囲の境界）との交差tを計算
+				if (outsideCode & BOTTOM)
+				{					
+					//-w<=yを組み替えてy+w<=0を判定している
+					denominator = direction.y - direction.w;
+					//値が小さい =　" x = -w "にほぼ平行になり、０除算の危険
+					if (std::fabsf(denominator) < 1e-6f) { return false; }//ここ関数化したい
+					//交点の範囲を計算
+					t = (-startClip.y - startClip.w) / denominator;
+				}
+				else if (outsideCode & TOP)
+				{
+					denominator = direction.y - direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					t = (startClip.w - startClip.y) / denominator;
+				}
+				else if (outsideCode & LEFT)
+				{
+					denominator = direction.x + direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					t = (-startClip.x - startClip.w) / denominator;
+				}
+				else if (outsideCode & RIGHT)
+				{
+					denominator = direction.x - direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					t = (startClip.w - startClip.x) / denominator;
+				}
+				else if (outsideCode & OUTCODE_NEAR)
+				{
+					//ここだけ0z<=0なので処理がわずかに違う
+					if (std::fabsf(direction.z) < 1e-6f) { return false; }
+					t = -startClip.z / direction.z;
+				}
+				else if (outsideCode & OUTCODE_FAR)
+				{
+					denominator = direction.z - direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					t = (startClip.w - startClip.z) / denominator;
+				}
+				//ここまで来たら何らかのバグが起きていることになる
+				else { assert(true); }
+
+				intersection = VectorLerp4D(startClip, endClip, t);
+
+				//tが線分上の範囲にない場合は計算をしない
+				if (t < 0.0f || t>1.0f) { return false; }
+
+				//外部の点を交点に置き換え、その点のoutcodeを計算しなおす
+				if (outsideCode == startOutcode)
+				{
+					startClip = intersection;
+					startClip = ComputeOutCode(startClip);
+				}
+				else
+				{
+					endClip = intersection;
+					endOutcode = ComputeOutCode(endClip);
+				}
+			}
+		}
+		//最大まで回るのはfloatが悪さした時
+		return false;
 
 	}
 
+	//-----Chohen-Sutherlandアルゴリズム終了
 
 	//カメラの移動速度
 	static const float MOVE_SPEED = 2.5f;
 
 	//マウス感度
-	static const float ROTATION_SENSITIVITY = 5.f;                           
+	static const float ROTATION_SENSITIVITY = 5.f;
 
+	//垂直方向の視野角
+	static float VERTICOL_VIEW = 60.0f * ONE_DEGREE;
+	//アスペクト比
+	static float ASPECT = WINDOW_WIDTH / WINDOW_HEIGHT;
+
+	//ニアクリップ面までの距離
+	static float NEAR_Z = 0.1f;
+	//ファークリップ面までの距離
+	static float FAR_Z = 1000.0f;
 }
 
 
 Camera::Camera()
-	:position{ 0,0,1000 }
+	:position{ 0,0,-50.0f }
+	,orientation()
+	,currentForward	{ 0.0f, 0.0f, 1.0f }
+	,currentRight	{ 1.0f, 0.0f, 0.0f }
+	,currentUp		{ 0.0f, 1.0f, 0.0f }
 {
+	//カーソルを中央にセット
+	SetMousePoint(static_cast<int>(WINDOW_WIDTH / 2), static_cast<int>(WINDOW_HEIGHT));
+
 }
 
 Camera::~Camera()
@@ -111,25 +239,46 @@ void Camera::Update()
 
 Matrix Camera::GetViewMatrix() const
 {
-	return Matrix();
+	//カメラの回転の共役を取得（オブジェクトはカメラと逆に回る）
+	Quaternion invOrientation = orientation.Conjugate();
+	//クォータニオンを回転行列に変換
+	Matrix invRotationMatrix = invOrientation.ToRotationMatrix();
+	//カメラが中心になるように平行移動行列を計算
+	Matrix invTranslate = Matrix::Identity();
+	invTranslate.m[3][0] = -position.x;
+	invTranslate.m[3][1] = -position.y;
+	invTranslate.m[3][2] = -position.z;
+
+	//平行移動行列*逆回転行列（この順番を厳守）
+	Matrix viewMatrix = MartixMultiply(invTranslate, invRotationMatrix);
+
+	//計算した行列を返す
+	return viewMatrix;
 }
 
 Matrix Camera::GetProjectionMatrix() const
 {
-	return Matrix();
+	return Perspective(VERTICOL_VIEW,ASPECT,NEAR_Z,FAR_Z);
 }
 
 Vector3D Camera::GetForwardVector() const
 {
-	return Vector3D();
+	// 現在のカメラの向きを行列に変換
+	Matrix rotMat = orientation.ToRotationMatrix();
+	//ワールド座標での前方ベクトルを回転行列で変換
+	return VEC3Transform({ 0.0f, 0.0f, 1.0f }, rotMat);
 }
 
 Vector3D Camera::GetRightVector() const
 {
-	return Vector3D();
+	Matrix rotMat = orientation.ToRotationMatrix();
+	// ローカル座標系の右方ベクトルを回転行列で変換
+	return VEC3Transform({ 1.0f, 0.0f, 0.0f }, rotMat);
 }
 
 Vector3D Camera::GetUpVector() const
 {
-	return Vector3D();
+	Matrix rotMat = orientation.ToRotationMatrix();
+	// ローカル座標系の上方ベクトルを回転行列で変換
+	return VEC3Transform({ 0.0f, 1.0f, 0.0f }, rotMat);
 }

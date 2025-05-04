@@ -54,21 +54,12 @@ private:
 	//カメラの回転(向き)
 	Quaternion orientation;
 
-	//垂直方向の視野角
-	float viewVer = 60.0f * ONE_DEGREE;
-	//アスペクト比
-	float aspect = WINDOW_WIDTH / WINDOW_HEIGHT;
-	//ニアクリップ面までの距離
-	float nearZ = 0.1f;
-	//ファークリップ面までの距離
-	float farZ = 1000.0f;
-
 	// 現在のカメラの前方ベクトル (初期値はワールドZ+)
-	Vector3D currentForward = { 0.0f, 0.0f, 1.0f };
+	Vector3D currentForward;
 	// 現在のカメラの右方ベクトル (初期値はワールドX+)
-	Vector3D currentRight = { 1.0f, 0.0f, 0.0f };
+	Vector3D currentRight;
 	// 現在のカメラの上方ベクトル (初期値はワールドY+)
-	Vector3D currentUp = { 0.0f, 1.0f, 0.0f };
+	Vector3D currentUp;
 
 };
 
