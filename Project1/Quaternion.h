@@ -138,7 +138,38 @@ struct Quaternion
 	/// <returns>共役クォータニオン</returns>
 	Quaternion Conjugate() const { return Quaternion(-x, -y, z, w); }
 
-	//次はここから
+	/// <summary>
+	/// クォータニオンから回転行列を生成する
+	/// </summary>
+	/// <returns>回転行列</returns>
+	Matrix ToRotationMatrix()const
+	{
+		Matrix result = Matrix::Identity();
+
+		//自身を正規化した値(qはquaternion)
+		Quaternion q = Normalized();
+
+		//都度参照するよりここで値を保存
+		float qx = q.x, qy = q.y, qz = q.z, qw = q.w;
+
+		//都度計算するよりここで先に計算
+		float xx = qx * qx; float yy = qy * qy; float zz = qz * qz;
+		float xy = qx * qy; float xz = qx * qz; float xw = qx * qw;
+		float yz = qy * qz; float yw = qy * qw; float zw = qz * qw;
+
+		// クォータニオンから回転行列への変換公式
+		result.m[0][0] = 1.0f - 2.0f * (yy + zz); result.m[0][1] = 2.0f * (xy + zw); result.m[0][2] = 2.0f * (xz - yw);
+		result.m[1][0] = 2.0f * (xy - zw); result.m[1][1] = 1.0f - 2.0f * (xx + zz); result.m[1][2] = 2.0f * (yz + xw);
+		result.m[2][0] = 2.0f * (xz + yw); result.m[2][1] = 2.0f * (yz - xw); result.m[2][2] = 1.0f - 2.0f * (xx + yy);
+
+		// クォータニオンから回転行列への変換公式
+		// { 1-2yy-2zz,  2xy+2zw,  2xz-2yw,        0}
+		// {   2xy-2zw,1-2xx-2zz,  2yz+2xw,        0}
+		// {   2xz+2yw,  2yz-2xw,1-2xx-2yy,        0}
+		// {         0,        0,        0,        1}
+
+		return result;
+	}
 
 };
 
