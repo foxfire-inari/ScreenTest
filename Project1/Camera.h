@@ -10,7 +10,7 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Draw(std::vector< std::vector<Vector3D>> _worldpos);
+	void Draw(std::vector< std::vector<Vector3D>> worldLines);
 	void Update();
 
 	Vector3D GetPosition() { return position; }
@@ -53,6 +53,9 @@ private:
 	Vector3D position;
 	//カメラの回転(向き)
 	Quaternion orientation;
+
+
+
 
 	// 現在のカメラの前方ベクトル (初期値はワールドZ+)
 	Vector3D currentForward;

@@ -227,13 +227,131 @@ Camera::~Camera()
 {
 }
 
-void Camera::Draw(std::vector< std::vector<Vector3D>> _worldpos)
+void Camera::Draw(std::vector< std::vector<Vector3D>> worldLines)
 {
+	//必要な行列を事前に計算
+	Matrix viewMatrix = GetViewMatrix();
+	Matrix projMatrix = GetProjectionMatrix();
+	Matrix viewProjMatrix = MartixMultiply(viewMatrix, projMatrix);
+
+	for (const auto& line : worldLines) 
+	{
+		//線分の始点と終点をクリップ座標に変換
+		Vector4D startClip = VEC4Transform({ line[0].x, line[0].y, line[0].z, 1.0f }, viewProjMatrix);
+		Vector4D endClip   = VEC4Transform({ line[1].x, line[1].y, line[1].z, 1.0f }, viewProjMatrix);
+
+		//クリッピング処理のため、コピー
+		Vector4D startClipped = startClip;
+		Vector4D endClipped = endClip;
+
+		// Cohen-Sutherlandアルゴリズムで線分をクリッピング
+		if (ClipLineCohenSutherland(startClipped, endClipped))
+		{
+			//線分が視錐台内に残った時のみ動く
+
+			//NDC座標とスクリーン座標を計算
+
+			//NDC座標用
+			Vector3D startNDC, endNDC;
+
+			//パースペクティブ除算の前に０除算防止
+			if (fabsf(startClipped.w) > 1e-6f && fabsf(endClipped.w) > 1e-6f)
+			{
+				startNDC = { startClipped.x / startClipped.w,startClipped.y / startClipped.w ,startClipped.z / startClipped.w };
+				endNDC   = {   endClipped.x / endClipped.w,    endClipped.y / endClipped.w ,    endClipped.z / endClipped.w };
+
+				//NDC座標をスクリーン座標（int）に変換
+				float heafWidth = WINDOW_WIDTH / 2.0f;
+				float heafHeight = WINDOW_HEIGHT / 2.0f;
+
+				int startX = static_cast<int>(startNDC.x * heafWidth  + heafWidth);
+				int startY = static_cast<int>(startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+				int endX   = static_cast<int>(  endNDC.x * heafWidth  + heafWidth);
+				int endY   = static_cast<int>(  endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+
+				//線の描画はDxlibの関数
+				DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
+
+			}
+
+		}
+
+	}
 
 }
 
 void Camera::Update()
 {
+	//マウスの現在座標を保存
+	int currentMouseX = 0;
+	int currentMouseY = 0;
+	GetMousePoint(&currentMouseX, &currentMouseY);
+
+	//画面中央の座標
+	const int centerX = static_cast<int>(WINDOW_WIDTH / 2);
+	const int centerY = static_cast<int>(WINDOW_HEIGHT / 2);
+
+	//マウスの移動量を保存
+	int mouseMoveX = currentMouseX - centerX;
+	int mouseMoveY = currentMouseY - centerY;
+
+	//マウスの移動量から回転角度を保存（ラジアン）
+	float YawAngle = static_cast<float>(mouseMoveX)* ROTATION_SENSITIVITY;
+	float PitchAngle = static_cast<float>(mouseMoveY)* ROTATION_SENSITIVITY;
+	float RollAngle = 0.0f;
+
+	//カメラのローカル座標軸ベクトルを取得する
+	currentUp = GetUpVector();
+	currentRight = GetRightVector();
+	currentForward = GetForwardVector();
+
+	//各回転軸からこのフレームでの回転量を表すクォータニオン
+	Quaternion yawDelta		= Quaternion::FromAxisAngle(currentUp,YawAngle);
+	Quaternion pitchDelta	= Quaternion::FromAxisAngle(currentRight,PitchAngle);
+	Quaternion rollDelta	= Quaternion::FromAxisAngle(currentForward,RollAngle);
+
+	//3つのQuaternionを合成してこのフレームでの回転を表すQuaternion
+	Quaternion deltaRotation = rollDelta * pitchDelta * yawDelta;
+
+	//カメラの向きに計算したQuaternionを適応
+	orientation = deltaRotation * orientation;
+
+	//念のため正規化
+	orientation.Normalize();
+
+	//-------------角度制限を書くならここ
+
+	//-------------ここから移動処理
+
+	//回転を適用した後の軸ベクトルを取得
+	currentForward = GetForwardVector();
+	currentRight = GetRightVector();
+	currentUp = GetUpVector();
+
+	//各方向への入力を保存
+	float inputForward = 0.0f;
+	float inputRight = 0.0f;
+	float inputUp = 0.0f;
+
+	// 各方向のインプットを取得
+	if (CheckHitKey(KEY_INPUT_W)) { inputForward += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_S)) { inputForward -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_D)) { inputRight += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_A)) { inputRight -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_E)) { inputUp += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_Q)) { inputUp -= 1.0f; }
+
+	//ワールド空間のベクトルを作成
+	Vector3D worldMoveOffset;
+
+	//各ローカル軸の方向に入力と移動速度で移動ベクトルを計算
+	worldMoveOffset += currentForward * inputForward * MOVE_SPEED;
+	worldMoveOffset += currentRight * inputRight * MOVE_SPEED;
+	worldMoveOffset += currentUp * inputUp * MOVE_SPEED;
+
+	position += worldMoveOffset;
+
+	SetMousePoint(centerX, centerY);
 
 }
 

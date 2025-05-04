@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Camera.h"
 #include "TopAngle.h"
+#include <vector>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
