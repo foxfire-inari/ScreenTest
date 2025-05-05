@@ -49,7 +49,7 @@ static Matrix MartixMultiply(const Matrix& second, const Matrix& first)
 	Matrix result;
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; i < 4; j++)
+		for (int j = 0; j < 4; j++)
 		{
 			for (int k = 0; k < 4; k++)
 			{
@@ -66,13 +66,15 @@ static Matrix MartixMultiply(const Matrix& second, const Matrix& first)
 /// </summary>
 /// <param name="viewVer">垂直方向の視野角（ラジアン）</param>
 /// <param name="aspect">アスペクト比（幅/高さ）</param>
-/// <param name="near">最前面までの距離</param>
-/// <param name="far">最奥面までの距離</param>
+/// <param name="_near">最前面までの距離</param>
+/// <param name="_far">最奥面までの距離</param>
 /// <returns>透視投影行列</returns>
-static Matrix Perspective(float viewVer, float aspect, float near, float far)
+static Matrix Perspective(float viewVer, float aspect, float _near, float _far)
 {
 	//アス比、最前面までの距離が適切な数値か、最奥面が最前面より手前に来ていないか
-	assert(aspect <= 0.0f || near <= 0.0f || far <= near);
+	assert(aspect >= 0.0f);
+	assert(_near >= 0.0f);
+	assert(_far >= _near);
 
 	//新しく行列を作る
 	Matrix result;
@@ -81,9 +83,9 @@ static Matrix Perspective(float viewVer, float aspect, float near, float far)
 	//X方向の拡大
 	float xScale = yScale / aspect;
 	//Z方向の係数
-	float zRange = (far + near) / (far - near);
+	float zRange = (_far + _near) / (_far - _near);
 	//Z座標の変換係数
-	float zOffset = -2 * far * near * (zRange / (far + near));
+	float zOffset = -2 * _far * _near * (zRange / (_far + _near));
 
 	//行列の要素をセット
 	result.m[0][0] = xScale;	

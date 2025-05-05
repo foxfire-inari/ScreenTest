@@ -117,8 +117,8 @@ static Vector3D Cross(const Vector3D rightVec, const Vector3D leftVec)
 /// <returns>角度 (ラジアン)</returns>
 static float AngleOfVector(const Vector3D aVec, const Vector3D bVec)
 {
-	assert(aVec.LengthSq() == 0 ||
-		   bVec.LengthSq() == 0);
+	assert(aVec.LengthSq() != 0 ||
+		   bVec.LengthSq() != 0);
 
 	//それぞれベクトルの長さを求める
 	float aLength = aVec.Length();

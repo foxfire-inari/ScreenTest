@@ -166,7 +166,7 @@ namespace
 					t = (startClip.w - startClip.z) / denominator;
 				}
 				//ここまで来たら何らかのバグが起きていることになる
-				else { assert(true); }
+				else { assert(false); }
 
 				intersection = VectorLerp4D(startClip, endClip, t);
 
@@ -197,7 +197,7 @@ namespace
 	static const float MOVE_SPEED = 2.5f;
 
 	//マウス感度
-	static const float ROTATION_SENSITIVITY = 5.f;
+	static const float ROTATION_SENSITIVITY = ONE_DEGREE * 0.1f;
 
 	//垂直方向の視野角
 	static float VERTICOL_VIEW = 60.0f * ONE_DEGREE;
@@ -298,7 +298,11 @@ void Camera::Update()
 	//マウスの移動量から回転角度を保存（ラジアン）
 	float YawAngle = static_cast<float>(mouseMoveX)* ROTATION_SENSITIVITY;
 	float PitchAngle = static_cast<float>(mouseMoveY)* ROTATION_SENSITIVITY;
+
 	float RollAngle = 0.0f;
+
+	if (CheckHitKey(KEY_INPUT_E)) { RollAngle += 2.0f * ONE_DEGREE; }
+	if (CheckHitKey(KEY_INPUT_Q)) { RollAngle -= 2.0f * ONE_DEGREE; }
 
 	//カメラのローカル座標軸ベクトルを取得する
 	currentUp = GetUpVector();
@@ -338,8 +342,6 @@ void Camera::Update()
 	if (CheckHitKey(KEY_INPUT_S)) { inputForward -= 1.0f; }
 	if (CheckHitKey(KEY_INPUT_D)) { inputRight += 1.0f; }
 	if (CheckHitKey(KEY_INPUT_A)) { inputRight -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_E)) { inputUp += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_Q)) { inputUp -= 1.0f; }
 
 	//ワールド空間のベクトルを作成
 	Vector3D worldMoveOffset;

@@ -63,10 +63,14 @@ struct Quaternion
 	Quaternion operator*(const Quaternion& qua)const
 	{
 		Quaternion result;
-		result.w = w * qua.w - x * qua.x - y * qua.y - z * qua.z;
-		result.x = w * qua.x + x * qua.w + y * qua.z - z * qua.y;
-		result.y = w * qua.y - x * qua.z + y * qua.w + z * qua.x;
-		result.z = w * qua.z + x * qua.y - y * qua.x + z * qua.w;
+		result.w =   w * qua.w   - x * qua.x   - y * qua.y   - z * qua.z;
+
+		result.x =   w * qua.x   + x * qua.w   + y * qua.z   - z * qua.y;
+
+		result.y =   w * qua.y   - x * qua.z   + y * qua.w   + z * qua.x;
+
+		result.z =   w * qua.z   + x * qua.y   - y * qua.x   + z * qua.w;
+
 		return result;
 	}
 
