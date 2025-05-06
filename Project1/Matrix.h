@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-
+#include<DxLib.h>
 /// <summary>
 /// 三次元の正方行列
 /// wまであるのは
@@ -34,6 +34,21 @@ struct Matrix
 		result.m[2][2] = 1.0f;
 		result.m[3][3] = 1.0f;
 		return result;
+	}
+	/// <summary>
+	/// デバッグ用に行列の要素を表示
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	void DrawData(int x, int y)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				DrawFormatString(x+j*192, y+i*24, GetColor(255, 255, 255), "m.[%d][%d]:%f ", i, j, m[i][j]);
+			}
+		}
 	}
 
 };
@@ -72,9 +87,7 @@ static Matrix MartixMultiply(const Matrix& second, const Matrix& first)
 static Matrix Perspective(float viewVer, float aspect, float _near, float _far)
 {
 	//アス比、最前面までの距離が適切な数値か、最奥面が最前面より手前に来ていないか
-	assert(aspect >= 0.0f);
-	assert(_near >= 0.0f);
-	assert(_far >= _near);
+	assert(aspect >= 0.0f || _near >= 0.0f || _far >= _near);
 
 	//新しく行列を作る
 	Matrix result;

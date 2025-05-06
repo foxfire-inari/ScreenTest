@@ -29,18 +29,18 @@ namespace
 
 	//アウトコード（ビット演算を行うための物）
 	const int INSIDE		=  0;	//000000
-	const int TOP			=  1;	//000001
-	const int BOTTOM		=  2;	//000010
-	const int LEFT			=  4;	//000100
-	const int RIGHT			=  8;	//001000
+	const int LEFT			=  1;	//000001
+	const int RIGHT			=  2;	//000010
+	const int BOTTOM		=  4;	//000100
+	const int TOP			=  8;	//001000
 	const int OUTCODE_NEAR	= 16;	//010000
 	const int OUTCODE_FAR	= 32;	//100000
 
 	/// <summary>
 	/// クリップ座標になった時、どの領域にあるかを閉めるアウトコード
 	/// </summary>
-	/// <param name="p"></param>
-	/// <returns></returns>
+	/// <param name="p">点P</param>
+	/// <returns>点Pが存在する空間</returns>
 	int ComputeOutCode(const Vector4D& p)
 	{
 		//内側として初期化
@@ -57,11 +57,11 @@ namespace
 		// 上下左右表裏で比較し、外側にあったら対応するビットを立てる
 
 		//同時に起こりえないのでelseでまとめる
-		if (p.y < -p.w) { code |= BOTTOM; }
-		else if (p.y > p.w) { code |= TOP; }
-
 		if (p.x < -p.w) { code |= LEFT; }
 		else if (p.x > p.w) { code |= RIGHT; }
+
+		if (p.y < -p.w) { code |= BOTTOM; }
+		else if (p.y > p.w) { code |= TOP; }
 
 		if (p.z < 0.0f) { code |= OUTCODE_NEAR; }
 		else if (p.z > p.w) { code |= OUTCODE_FAR; }
@@ -126,25 +126,13 @@ namespace
 				float denominator;
 
 				//outsideCodeに対する境界平面（描画される範囲の境界）との交差tを計算
-				if (outsideCode & BOTTOM)
-				{					
-					//-w<=yを組み替えてy+w<=0を判定している
-					denominator = direction.y - direction.w;
-					//値が小さい =　" x = -w "にほぼ平行になり、０除算の危険
-					if (std::fabsf(denominator) < 1e-6f) { return false; }//ここ関数化したい
-					//交点の範囲を計算
-					t = (-startClip.y - startClip.w) / denominator;
-				}
-				else if (outsideCode & TOP)
+				if (outsideCode & LEFT)
 				{
-					denominator = direction.y - direction.w;
-					if (std::fabsf(denominator) < 1e-6f) { return false; }
-					t = (startClip.w - startClip.y) / denominator;
-				}
-				else if (outsideCode & LEFT)
-				{
+					//-w<=xを組み替えてx+w<=0にして考える
 					denominator = direction.x + direction.w;
+					//値が小さい =　" x = -w "にほぼ平行になり、０除算の危険
 					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					//交点の範囲を計算
 					t = (-startClip.x - startClip.w) / denominator;
 				}
 				else if (outsideCode & RIGHT)
@@ -152,6 +140,18 @@ namespace
 					denominator = direction.x - direction.w;
 					if (std::fabsf(denominator) < 1e-6f) { return false; }
 					t = (startClip.w - startClip.x) / denominator;
+				}
+				else if (outsideCode & BOTTOM)
+				{					
+					denominator = direction.y + direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }//ここ関数化したい
+					t = (-startClip.y - startClip.w) / denominator;
+				}
+				else if (outsideCode & TOP)
+				{
+					denominator = direction.y - direction.w;
+					if (std::fabsf(denominator) < 1e-6f) { return false; }
+					t = (startClip.w - startClip.y) / denominator;
 				}
 				else if (outsideCode & OUTCODE_NEAR)
 				{
@@ -168,16 +168,17 @@ namespace
 				//ここまで来たら何らかのバグが起きていることになる
 				else { assert(false); }
 
-				intersection = VectorLerp4D(startClip, endClip, t);
-
 				//tが線分上の範囲にない場合は計算をしない
 				if (t < 0.0f || t>1.0f) { return false; }
+
+				//交点の座標を計算
+				intersection = VectorLerp4D(startClip, endClip, t);
 
 				//外部の点を交点に置き換え、その点のoutcodeを計算しなおす
 				if (outsideCode == startOutcode)
 				{
 					startClip = intersection;
-					startClip = ComputeOutCode(startClip);
+					startOutcode = ComputeOutCode(startClip);
 				}
 				else
 				{
@@ -219,7 +220,7 @@ Camera::Camera()
 	,currentUp		{ 0.0f, 1.0f, 0.0f }
 {
 	//カーソルを中央にセット
-	SetMousePoint(static_cast<int>(WINDOW_WIDTH / 2), static_cast<int>(WINDOW_HEIGHT));
+	SetMousePoint(static_cast<int>(WINDOW_WIDTH / 2), static_cast<int>(WINDOW_HEIGHT) / 2);
 
 }
 
@@ -257,17 +258,17 @@ void Camera::Draw(std::vector< std::vector<Vector3D>> worldLines)
 			//パースペクティブ除算の前に０除算防止
 			if (fabsf(startClipped.w) > 1e-6f && fabsf(endClipped.w) > 1e-6f)
 			{
-				startNDC = { startClipped.x / startClipped.w,startClipped.y / startClipped.w ,startClipped.z / startClipped.w };
-				endNDC   = {   endClipped.x / endClipped.w,    endClipped.y / endClipped.w ,    endClipped.z / endClipped.w };
+				startNDC = { startClipped.x / startClipped.w,  startClipped.y / startClipped.w ,  startClipped.z /  startClipped.w };
+				endNDC   = {   endClipped.x /	endClipped.w,    endClipped.y /   endClipped.w ,  endClipped.z   /    endClipped.w };
 
 				//NDC座標をスクリーン座標（int）に変換
 				float heafWidth = WINDOW_WIDTH / 2.0f;
 				float heafHeight = WINDOW_HEIGHT / 2.0f;
 
-				int startX = static_cast<int>(startNDC.x * heafWidth  + heafWidth);
-				int startY = static_cast<int>(startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
-				int endX   = static_cast<int>(  endNDC.x * heafWidth  + heafWidth);
-				int endY   = static_cast<int>(  endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+				int startX = static_cast<int>( startNDC.x * heafWidth  + heafWidth);
+				int startY = static_cast<int>(-startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+				int endX   = static_cast<int>(   endNDC.x * heafWidth  + heafWidth);
+				int endY   = static_cast<int>(  -endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
 
 				//線の描画はDxlibの関数
 				DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
@@ -296,8 +297,8 @@ void Camera::Update()
 	int mouseMoveY = currentMouseY - centerY;
 
 	//マウスの移動量から回転角度を保存（ラジアン）
-	float YawAngle = static_cast<float>(mouseMoveX)* ROTATION_SENSITIVITY;
-	float PitchAngle = static_cast<float>(mouseMoveY)* ROTATION_SENSITIVITY;
+	float YawAngle = static_cast<float>(mouseMoveX) * ROTATION_SENSITIVITY;
+	float PitchAngle = static_cast<float>(mouseMoveY) * ROTATION_SENSITIVITY;
 
 	float RollAngle = 0.0f;
 
@@ -310,10 +311,11 @@ void Camera::Update()
 	currentForward = GetForwardVector();
 
 	//各回転軸からこのフレームでの回転量を表すクォータニオン
-	Quaternion yawDelta		= Quaternion::FromAxisAngle(currentUp,YawAngle);
-	Quaternion pitchDelta	= Quaternion::FromAxisAngle(currentRight,PitchAngle);
-	Quaternion rollDelta	= Quaternion::FromAxisAngle(currentForward,RollAngle);
+	Quaternion yawDelta   = Quaternion::FromAxisAngle(currentUp,      YawAngle);
+	Quaternion pitchDelta = Quaternion::FromAxisAngle(currentRight,   PitchAngle);
+	Quaternion rollDelta  = Quaternion::FromAxisAngle(currentForward, RollAngle);
 
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%f\n%f\n%f\n%f\n", pitchDelta.x,pitchDelta.y,pitchDelta.z,pitchDelta.w);
 	//3つのQuaternionを合成してこのフレームでの回転を表すQuaternion
 	Quaternion deltaRotation = rollDelta * pitchDelta * yawDelta;
 
@@ -342,6 +344,8 @@ void Camera::Update()
 	if (CheckHitKey(KEY_INPUT_S)) { inputForward -= 1.0f; }
 	if (CheckHitKey(KEY_INPUT_D)) { inputRight += 1.0f; }
 	if (CheckHitKey(KEY_INPUT_A)) { inputRight -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_SPACE)) { inputUp += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_LCONTROL)) { inputUp -= 1.0f; }
 
 	//ワールド空間のベクトルを作成
 	Vector3D worldMoveOffset;

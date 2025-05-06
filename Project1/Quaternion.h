@@ -140,7 +140,7 @@ struct Quaternion
 	/// 共役クォータニオンを生成して返す
 	/// </summary>
 	/// <returns>共役クォータニオン</returns>
-	Quaternion Conjugate() const { return Quaternion(-x, -y, z, w); }
+	Quaternion Conjugate() const { return Quaternion(-x, -y, -z, w); }
 
 	/// <summary>
 	/// クォータニオンから回転行列を生成する
@@ -162,9 +162,9 @@ struct Quaternion
 		float yz = qy * qz; float yw = qy * qw; float zw = qz * qw;
 
 		// クォータニオンから回転行列への変換公式
-		result.m[0][0] = 1.0f - 2.0f * (yy + zz); result.m[0][1] = 2.0f * (xy + zw); result.m[0][2] = 2.0f * (xz - yw);
-		result.m[1][0] = 2.0f * (xy - zw); result.m[1][1] = 1.0f - 2.0f * (xx + zz); result.m[1][2] = 2.0f * (yz + xw);
-		result.m[2][0] = 2.0f * (xz + yw); result.m[2][1] = 2.0f * (yz - xw); result.m[2][2] = 1.0f - 2.0f * (xx + yy);
+		result.m[0][0] = 1.0f - 2.0f * (yy + zz);	result.m[0][1] = 2.0f * (xy + zw);			result.m[0][2] = 2.0f * (xz - yw);
+		result.m[1][0] = 2.0f * (xy - zw);			result.m[1][1] = 1.0f - 2.0f * (xx + zz);	result.m[1][2] = 2.0f * (yz + xw);
+		result.m[2][0] = 2.0f * (xz + yw);			result.m[2][1] = 2.0f * (yz - xw);			result.m[2][2] = 1.0f - 2.0f * (xx + yy);
 
 		// クォータニオンから回転行列への変換公式
 		// { 1-2yy-2zz,  2xy+2zw,  2xz-2yw,        0}

@@ -3,6 +3,12 @@
 #include "Camera.h"
 #include <vector>
 
+/// <summary>
+/// キューブ状のラインを作る関数
+/// </summary>
+/// <param name="size"></param>
+/// <param name="center"></param>
+/// <returns></returns>
 std::vector<std::vector<Vector3D>> CreateCuveLines(float size, const Vector3D& center)
 {
     std::vector<std::vector<Vector3D>> result;
@@ -56,6 +62,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     //ワールド上の全ての線情報を保持
     std::vector< std::vector<Vector3D>> worldLine = {};
 
+    //キューブを作成＆保存
     std::vector< std::vector<Vector3D>>cubeLines = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
     worldLine.insert(worldLine.end(), cubeLines.begin(), cubeLines.end());
 
