@@ -15,6 +15,16 @@ struct Vector3D
 	Vector3D(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) 
 		:x{ _x },y{ _y },z{ _z }{}
 
+	/// <summary>
+	/// ゼロベクトルをセット
+	/// </summary>
+	void Zero()
+	{
+		x = 0.0f;
+		y = 0.0f;
+		z = 0.0f;
+	}
+
 	//加算(+)
 	Vector3D operator +(const Vector3D _vec)const { return { x + _vec.x, y + _vec.y, z + _vec.z }; }
 	//加算(+=)

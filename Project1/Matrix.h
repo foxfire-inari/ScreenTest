@@ -35,6 +35,7 @@ struct Matrix
 		result.m[3][3] = 1.0f;
 		return result;
 	}
+
 	/// <summary>
 	/// デバッグ用に行列の要素を表示
 	/// </summary>

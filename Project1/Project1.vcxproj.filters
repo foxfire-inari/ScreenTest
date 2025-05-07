@@ -17,7 +17,7 @@
       <UniqueIdentifier>{45482695-33f0-4745-8348-0e885bf565d0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Singleton">
-      <UniqueIdentifier>{c8bd4e36-0f88-4f51-8842-14516a068115}</UniqueIdentifier>
+      <UniqueIdentifier>{f19f4b3e-f30c-4aa0-afc3-157c04acdfba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,7 +27,7 @@
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="LoadModel.cpp">
+    <ClCompile Include="ObjFile.cpp">
       <Filter>Singleton</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="Singleton.h">
       <Filter>Singleton</Filter>
     </ClInclude>
-    <ClInclude Include="LoadModel.h">
+    <ClInclude Include="ObjFile.h">
       <Filter>Singleton</Filter>
     </ClInclude>
   </ItemGroup>

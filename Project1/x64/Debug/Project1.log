@@ -1,3 +1,5 @@
-﻿  Camera.cpp
-C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Project1\Vector.h(131,17): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Project1.vcxproj -> C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\x64\Debug\Project1.exe
+﻿  ObjFile.cpp
+C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\Project1\Vector.h(141,17): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'ObjFile.cpp' をコンパイルしています)
+  
+  Project1.vcxproj -> C:\Users\yurin\OneDrive\デスクトップ\プログラム\Visual\ScreenTest\x64\Debug\Project1.exe

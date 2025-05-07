@@ -1,10 +1,11 @@
 #pragma once
+#include"Common.h"
 
 /// <summary>
 /// シングルトンクラスの継承元
 /// class ●●● : public Singleton<●●●>
 /// </summary>
-/// <typename name="T">子クラスの名前</typename>
+/// <typeparam name="T">子クラスの名前</typeparam>
 template<typename T>
 class Singleton
 {
@@ -26,7 +27,7 @@ public:
 	/// <summary>
 	/// ポインタを返す
 	/// </summary>
-	/// <returns>自身のポインタ</returns>
+	/// <returns></returns>
 	static T* GetInstance() {
 		return instance;
 	};

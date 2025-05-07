@@ -1,6 +1,7 @@
 #include "Common.h"
 #include "DxLib.h"
 #include "Camera.h"
+#include "ObjFile.h"
 #include <vector>
 
 /// <summary>
@@ -66,10 +67,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     std::vector< std::vector<Vector3D>>cubeLines = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
     worldLine.insert(worldLine.end(), cubeLines.begin(), cubeLines.end());
 
+    ObjFile::Create();
 
+    //OBJファイルを読み込む
+    std::vector< std::vector<Vector3D>> modelLines = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
+    worldLine.insert(worldLine.end(), modelLines.begin(), modelLines.end());
 
 
     Camera* camera = new Camera();
+
     //TopAngle* topangle = new TopAngle(camera);
 
     // ウインドウが閉じられるかエスケープキーが押されるまでループ
@@ -87,6 +93,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // 裏画面の内容を表画面に反映
         ScreenFlip();
     }
+
+    ObjFile::Destroy();
 
     // ＤＸライブラリの後始末
     DxLib_End();
