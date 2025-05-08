@@ -7,8 +7,8 @@
 /// </summary>
 struct MeshObject
 {
-	MeshObject() {};
-	~MeshObject() {};
+	MeshObject() {}
+	~MeshObject() {}
 
 	//オブジェクトを構成する全ての線分
 	std::vector<LineVertex> lineVertexs;

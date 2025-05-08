@@ -341,25 +341,25 @@ void Camera::Update()
 	currentUp = GetUpVector();
 
 	//各方向への入力を保存
-	float inputForward = 0.0f;
-	float inputRight = 0.0f;
-	float inputUp = 0.0f;
-
+	Vector3D inputVec;
 	// 各方向のインプットを取得
-	if (CheckHitKey(KEY_INPUT_W)) { inputForward += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_S)) { inputForward -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_D)) { inputRight += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_A)) { inputRight -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_SPACE)) { inputUp += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_LCONTROL)) { inputUp -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_W)) { inputVec.z += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_S)) { inputVec.z -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_D)) { inputVec.x += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_A)) { inputVec.x -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_SPACE)) { inputVec.y += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_LCONTROL)) { inputVec.y -= 1.0f; }
+
+	//√2走法を回避
+	inputVec.Normalize();
 
 	//ワールド空間のベクトルを作成
 	Vector3D worldMoveOffset;
 
 	//各ローカル軸の方向に入力と移動速度で移動ベクトルを計算
-	worldMoveOffset += currentForward * inputForward * MOVE_SPEED;
-	worldMoveOffset += currentRight * inputRight * MOVE_SPEED;
-	worldMoveOffset += currentUp * inputUp * MOVE_SPEED;
+	worldMoveOffset += currentForward * inputVec.z * MOVE_SPEED;
+	worldMoveOffset += currentRight * inputVec.x * MOVE_SPEED;
+	worldMoveOffset += currentUp * inputVec.y * MOVE_SPEED;
 
 	position += worldMoveOffset;
 

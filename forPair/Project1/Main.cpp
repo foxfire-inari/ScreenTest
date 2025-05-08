@@ -69,14 +69,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     MeshObject cube = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
     worldObjects.emplace_back(cube);
 
-    //-----------------------修正点
-    //ObjFile::Create();
-    //
-    ////OBJファイルを読み込む
-    //std::vector< std::vector<Vector3D>> modelLines = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
-    //worldLine.insert(worldLine.end(), modelLines.begin(), modelLines.end());
-    //
-    //ObjFile::Destroy();
+    ObjFile::Create();
+    
+    //OBJファイルを読み込む
+    MeshObject modelLines = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
+    worldObjects.emplace_back(modelLines);
+    
+    ObjFile::Destroy();
 
     Camera* camera = new Camera();
 

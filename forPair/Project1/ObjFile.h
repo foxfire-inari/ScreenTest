@@ -3,6 +3,7 @@
 #include "Singleton.h"
 #include "Vector.h"
 
+struct MeshObject;
 /// <summary>
 /// objファイルを読み込むシングルトンクラス
 /// </summary>
@@ -16,7 +17,7 @@ public:
 	/// </summary>
 	/// <param name="fileName">開くファイル(文字列を操作することは無いのでstringではない)</param>
 	/// <returns>線分情報</returns>
-	std::vector<std::vector<Vector3D>>LoadModel(const char* fileName);
+	MeshObject LoadModel(const char* fileName);
 private:
 	/// <summary>
 	/// getlineした文字列をdelimiterごとに分割

@@ -5,7 +5,7 @@
 #include "Matrix.h"
 #include "Quaternion.h"
 
-class MeshObject;
+struct MeshObject;
 class Camera
 {
 public:

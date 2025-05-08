@@ -1,4 +1,6 @@
 #include "ObjFile.h"
+#include "MeshObject.h"
+#include "LineVertex.h"
 #include <iostream>
 #include <fstream>
 #include <assert.h>
@@ -15,12 +17,12 @@ ObjFile::~ObjFile()
 {
 }
 
-std::vector<std::vector<Vector3D>> ObjFile::LoadModel(const char* fileName)
+MeshObject ObjFile::LoadModel(const char* fileName)
 {
 	//ファイルからの入力を得るためにifstreamを使用
 	std::ifstream ifs(fileName);
 	//全ての処理済みの要素をまとめる変数
-	std::vector<std::vector<Vector3D>> result;
+	MeshObject result;
 
 	//ファイルが開かなければ何も入れずリターン
 	if (!ifs.is_open())return result;
@@ -46,7 +48,7 @@ std::vector<std::vector<Vector3D>> ObjFile::LoadModel(const char* fileName)
 	std::vector<std::string> fSource;
 
 	//線分として扱う頂点座標を保存
-	std::vector<Vector3D> fPoint;
+	LineVertex fPoint;
 
 	while (std::getline(ifs, line))
 	{
@@ -108,8 +110,10 @@ std::vector<std::vector<Vector3D>> ObjFile::LoadModel(const char* fileName)
 					vSource.at(fVertex.at(startPoint)-1),
 					vSource.at(fVertex.at(endPoint)-1)
 				};
-				result.push_back(fPoint);
-				fPoint.clear();
+
+				//----------------------------ここに既に存在する線分かを判断する式を加える
+
+				result.lineVertexs.push_back(fPoint);
 			}
 			fVertex.clear();
 
