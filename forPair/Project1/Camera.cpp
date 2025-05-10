@@ -28,13 +28,13 @@ namespace
 	//-----Chohen-Sutherlandアルゴリズム
 
 	//アウトコード（ビット演算を行うための物）
-	const int INSIDE		=  0;	//000000
-	const int LEFT			=  1;	//000001
-	const int RIGHT			=  2;	//000010
-	const int BOTTOM		=  4;	//000100
-	const int TOP			=  8;	//001000
-	const int OUTCODE_NEAR	= 16;	//010000
-	const int OUTCODE_FAR	= 32;	//100000
+	static const int INSIDE			=  0;	//000000
+	static const int LEFT			=  1;	//000001
+	static const int RIGHT			=  2;	//000010
+	static const int BOTTOM			=  4;	//000100
+	static const int TOP			=  8;	//001000
+	static const int OUTCODE_NEAR	= 16;	//010000
+	static const int OUTCODE_FAR	= 32;	//100000
 
 	/// <summary>
 	/// クリップ座標になった時、どの領域にあるかを閉めるアウトコード
@@ -201,14 +201,14 @@ namespace
 	static const float ROTATION_SENSITIVITY = ONE_DEGREE * 0.1f;
 
 	//垂直方向の視野角
-	static float VERTICOL_VIEW = 60.0f * ONE_DEGREE;
+	static const float VERTICOL_VIEW = 60.0f * ONE_DEGREE;
 	//アスペクト比
-	static float ASPECT = WINDOW_WIDTH / WINDOW_HEIGHT;
+	static const float ASPECT = WINDOW_WIDTH / WINDOW_HEIGHT;
 
 	//ニアクリップ面までの距離
-	static float NEAR_Z = 0.1f;
+	static const float NEAR_Z = 0.1f;
 	//ファークリップ面までの距離
-	static float FAR_Z = 1000.0f;
+	static const float FAR_Z = 1000.0f;
 }
 
 

@@ -49,8 +49,11 @@ MeshObject CreateCuveLines(float size, const Vector3D& center)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    ChangeWindowMode(TRUE); // ウィンドウモードに設定
-    SetWindowSizeChangeEnableFlag(FALSE);//ウィンドウサイズを変えられないようにする
+    // ウィンドウモードに設定
+    ChangeWindowMode(TRUE); 
+    //ウィンドウサイズを変えられないようにする
+    SetWindowSizeChangeEnableFlag(FALSE);
+    //ウィンドウサイズをセット
     SetGraphMode(static_cast<int>(WINDOW_WIDTH), static_cast<int>(WINDOW_HEIGHT), 32);
     // ＤＸライブラリの初期化
     if (DxLib_Init() < 0)
@@ -63,18 +66,33 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     // 描画先を裏画面に変更
     SetDrawScreen(DX_SCREEN_BACK);
 
+    //要素の削除を効率よくするためlistにする
     std::list<MeshObject> worldObjects = {};
 
     //キューブを作成＆保存
-    MeshObject cube = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
-    worldObjects.emplace_back(cube);
+    //MeshObject cube = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
+    //worldObjects.emplace_back(cube);
 
+    //モデルを読み込むシングルトンクラスを作成
     ObjFile::Create();
     
-    //OBJファイルを読み込む
-    MeshObject modelLines = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
-    worldObjects.emplace_back(modelLines);
+    //剣のモデルを読み込む
+    //MeshObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
+    //worldObjects.emplace_back(modelSword);
     
+    //ミクさんを読み込む
+    MeshObject modelmiku = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
+    worldObjects.emplace_back(modelmiku);
+
+    //ガチャガチャを読み込む
+    //MeshObject modelGacya = ObjFile::GetInstance()->LoadModel("3DModel/Gacya.obj");
+    //worldObjects.emplace_back(modelGacya);
+
+    //木を読み込む
+    //MeshObject modelTree = ObjFile::GetInstance()->LoadModel("3DModel/Tree.obj");
+    //worldObjects.emplace_back(modelTree);
+
+
     ObjFile::Destroy();
 
     Camera* camera = new Camera();

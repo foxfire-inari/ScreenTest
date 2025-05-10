@@ -36,10 +36,9 @@ struct Vector3D
 	void operator -=(Vector3D _vec) { x -= _vec.x; y -= _vec.y; z -= _vec.z; }
 
 	//float型でスケーリング(*)
-	Vector3D operator*(float _scale) const { return { x * _scale, y * _scale, z * _scale }; }
+	Vector3D operator *(float _scale) const { return { x * _scale, y * _scale, z * _scale }; }
 	//float型でスケーリング(*=)
-	void operator*=(float _scale) { x *= _scale; y *= _scale; z *= _scale; }
-
+	void operator *=(float _scale) { x *= _scale; y *= _scale; z *= _scale; }
 
 	/// <summary>
 	/// 比較用の長さを取得（長さの二乗を求める）
