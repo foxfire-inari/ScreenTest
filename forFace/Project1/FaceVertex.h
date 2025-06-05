@@ -5,7 +5,7 @@
 namespace 
 {
 	//1つの面に対して予想される最大頂点数
-	static int VERTEX_SIZE = 4;
+	static int VERTEX_SIZE = 6;
 }
 
 /// <summary>
@@ -14,7 +14,10 @@ namespace
 /// </summary>
 struct FaceVertex
 {
-	FaceVertex() {};
+	FaceVertex() 
+	{
+		vertexs.reserve(VERTEX_SIZE);
+	};
 	/// <summary>
 	/// 面を構成する情報を保存
 	/// </summary>
@@ -23,9 +26,9 @@ struct FaceVertex
 	FaceVertex(std::vector<Vector3D> _vertex,Vector3D _normalVer) 
 	{ 
 		//頂点情報を保存
-		vertex.reserve(VERTEX_SIZE);
-		vertex = _vertex;
-		vertex.shrink_to_fit();
+		vertexs.reserve(VERTEX_SIZE);
+		vertexs = _vertex;
+		vertexs.shrink_to_fit();
 
 		//法線ベクトルを保存
 		normalVer = _normalVer;
@@ -36,7 +39,7 @@ struct FaceVertex
 	/// <summary>
 	/// 頂点座標
 	/// </summary>
-	std::vector<Vector3D> vertex;
+	std::vector<Vector3D> vertexs;
 
 	/// <summary>
 	/// 法線ベクトル

@@ -37,7 +37,7 @@ namespace
 	static const int OUTCODE_FAR	= 32;	//100000
 
 	/// <summary>
-	/// クリップ座標になった時、どの領域にあるかを閉めるアウトコード
+	/// クリップ座標になった時、どの領域にあるかを決めるアウトコード
 	/// </summary>
 	/// <param name="p">点P</param>
 	/// <returns>点Pが存在する空間</returns>
@@ -236,12 +236,11 @@ void Camera::Draw(std::list<MeshObject> worldObjects)
 	Matrix viewProjMatrix = MartixMultiply(viewMatrix, projMatrix);
 
 	//オブジェクトごとに取得
-	for (const auto& object : worldObjects) 
+	for (const auto& object : worldObjects)
 	{
-		//オブジェクトの線分を一本ずつ取得
-		for (const auto& line : object.faceVertexs)
+		//オブジェクトの面を一面ずつ取得
+		for (const auto& face : object.faceVertexs)
 		{
-
 			//線分の始点と終点をクリップ座標に変換
 			Vector4D startClip = VEC4Transform({ line.vertexPair.first.x, line.vertexPair.first.y, line.vertexPair.first.z, 1.0f }, viewProjMatrix);
 			Vector4D endClip = VEC4Transform({ line.vertexPair.second.x, line.vertexPair.second.y, line.vertexPair.second.z, 1.0f }, viewProjMatrix);
@@ -279,12 +278,9 @@ void Camera::Draw(std::list<MeshObject> worldObjects)
 					DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
 
 				}
-
 			}
 		}
-
 	}
-
 }
 
 void Camera::Update()

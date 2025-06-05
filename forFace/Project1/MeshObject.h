@@ -12,7 +12,7 @@ struct MeshObject
 	MeshObject(int _element) { faceVertexs.reserve(_element); }
 	~MeshObject() {}
 
-	//オブジェクトを構成する全ての線分
+	//オブジェクトを構成する全ての頂点
 	std::vector<FaceVertex> faceVertexs;
 };
 

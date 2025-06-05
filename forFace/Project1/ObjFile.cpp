@@ -12,7 +12,7 @@ namespace
 	static const int VERTEX_ELEMENT = 20000;
 	//線分のおおよその最大数
 	static const int LINE_ELEMENT = 50000;
-	//多角形のおおよその最大数
+	//面の頂点のおおよその最大数
 	static const int FACE_INDEX_ELEMENT = 5;
 }
 
@@ -45,10 +45,10 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 	//uv座標のみを保存
 	//std::vector<float[2]> vtSource = {};
 	
-	//線分に使われるインデックスを保存
-	std::vector<std::pair<int, int>> lineIndexSource;
+	//面に使われるインデックスを保存
+	std::vector<int> faceIndexSource;
 	//先にメモリを確保しておく
-	lineIndexSource.reserve(LINE_ELEMENT);
+	faceIndexSource.reserve(LINE_ELEMENT);
 
 	//一列分の文字列を受け取る変数
 	std::string line;
@@ -108,50 +108,23 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 				}
 			}
 
-			//頂点のインデックスから線分を作る
+			//面として頂点を保存する
+			FaceVertex faceVertex;
+
+			//頂点情報を取得、保存
 			for (int i = 0; i < usedVertexIndex.size(); ++i)
 			{
-				//nとn+1番目の頂点で線分を作成
-				int startPoint = i;
-				int endPoint = i + 1;
-
-				//n+1番目の頂点が最大値を超えたか
-				if (endPoint >= usedVertexIndex.size())
-				{
-					//最初の頂点を取得するようにする
-					endPoint = 0;
-				}
-
-				//fで指定されている数字は1から始まるので-1する
-				int startIndex	= usedVertexIndex.at(startPoint) - 1;
-				int endIndex	= usedVertexIndex.at(endPoint) - 1;
-
-				//インデックスが小さい順に並べなおす
-				std::pair<int, int> line = (endIndex > startIndex) ? std::make_pair(startIndex, endIndex) : std::make_pair(endIndex, startIndex);
-
-				//既に存在するペアかを取得
-				auto it = std::find(lineIndexSource.begin(), lineIndexSource.end(), line);
-
-				//存在しなければ追加
-				if (it == lineIndexSource.end())
-					lineIndexSource.push_back(line);
+				//頂点情報は、1から数えるので-1する必要がある
+				faceVertex.vertexs.push_back(vertexSource[usedVertexIndex.at(i) - 1]);
 			}
+
+			//取得しきったらresultに追加
+			result.faceVertexs.push_back(faceVertex);
+
 			usedVertexIndex.clear();
 		}
 	}
 
-	//インデックスから線分を作成
-	for (int i = 0; i < lineIndexSource.size(); ++i)
-	{
-		//線分を生成
-		LineVertex lineVertex;
-		lineVertex.vertexPair = std::make_pair
-		(
-			vertexSource[lineIndexSource[i].first],
-			vertexSource[lineIndexSource[i].second]
-		);
-		result.faceVertexs.push_back(lineVertex);
-	}
 	//使用していないメモリを開放
 	result.faceVertexs.shrink_to_fit();
 	return result;

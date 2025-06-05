@@ -77,8 +77,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     ObjFile::Create();
     
     //Œ•‚Ìƒ‚ƒfƒ‹‚ð“Ç‚Ýž‚Þ
-    //MeshObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
-    //worldObjects.emplace_back(modelSword);
+    MeshObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
+    worldObjects.emplace_back(modelSword);
     
     //ƒ~ƒN‚³‚ñ‚ð“Ç‚Ýž‚Þ
     //MeshObject modelmiku = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
