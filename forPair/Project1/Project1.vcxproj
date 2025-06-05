@@ -147,6 +147,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraMath.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="FaceVertex.h" />
     <ClInclude Include="LineVertex.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MeshObject.h" />
