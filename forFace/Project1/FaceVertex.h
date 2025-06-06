@@ -18,6 +18,7 @@ struct FaceVertex
 	{
 		vertexs.reserve(VERTEX_SIZE);
 	};
+
 	/// <summary>
 	/// –Ê‚ğ\¬‚·‚éî•ñ‚ğ•Û‘¶
 	/// </summary>

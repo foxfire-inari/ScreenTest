@@ -1,0 +1,22 @@
+﻿  Main.cpp
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(184,50): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(184,38): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(184,28): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(184,17): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(190,38): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(190,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(190,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(190,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(206,54): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(206,45): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(206,36): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(206,27): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(207,54): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(207,45): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(207,36): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(207,27): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(208,54): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(208,45): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(208,36): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\Project1\Main.cpp(208,27): warning C4244: '引数': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  Project1.vcxproj -> C:\Users\G2217\Desktop\プログラム\Dxlib\ScreenTest\ScreenTest\Sutherland_HodgmanTest\x64\Debug\Project1.exe

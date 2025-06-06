@@ -1,0 +1,145 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\FaceVertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\FaceVertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\MeshObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\MeshObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\ObjFile.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\ObjFile.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Common.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C4F1EBA0-6080-4C72-96E9-313FE2736160}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Common.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Common.h",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Common.h",
+              "RelativeDocumentMoniker": "Project1\\Common.h",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Common.h",
+              "RelativeToolTip": "Project1\\Common.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-06T04:51:16.51Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Main.cpp",
+              "RelativeDocumentMoniker": "Project1\\Main.cpp",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Main.cpp",
+              "RelativeToolTip": "Project1\\Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-06T04:51:18.167Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MeshObject.h",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\MeshObject.h",
+              "RelativeDocumentMoniker": "Project1\\MeshObject.h",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\MeshObject.h",
+              "RelativeToolTip": "Project1\\MeshObject.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-08T06:33:09.016Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FaceVertex.h",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\FaceVertex.h",
+              "RelativeDocumentMoniker": "Project1\\FaceVertex.h",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\FaceVertex.h",
+              "RelativeToolTip": "Project1\\FaceVertex.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-06-05T09:28:48.219Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Camera.cpp",
+              "RelativeDocumentMoniker": "Project1\\Camera.cpp",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\Camera.cpp",
+              "RelativeToolTip": "Project1\\Camera.cpp",
+              "ViewState": "AgIAAIUBAAAAAAAAAAAmwJoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-06T04:51:58.463Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ObjFile.h",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.h",
+              "RelativeDocumentMoniker": "Project1\\ObjFile.h",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.h",
+              "RelativeToolTip": "Project1\\ObjFile.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-07T00:50:14.47Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ObjFile.cpp",
+              "DocumentMoniker": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.cpp",
+              "RelativeDocumentMoniker": "Project1\\ObjFile.cpp",
+              "ToolTip": "C:\\Users\\G2217\\Desktop\\\u30D7\u30ED\u30B0\u30E9\u30E0\\Dxlib\\ScreenTest\\ScreenTest\\Sutherland_HodgmanTest\\Project1\\ObjFile.cpp",
+              "RelativeToolTip": "Project1\\ObjFile.cpp",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAqwIEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-07T00:51:54.741Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
