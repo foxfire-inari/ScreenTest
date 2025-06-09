@@ -9,53 +9,14 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="3DMath">
-      <UniqueIdentifier>{45482695-33f0-4745-8348-0e885bf565d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Singleton">
-      <UniqueIdentifier>{f19f4b3e-f30c-4aa0-afc3-157c04acdfba}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjFile.cpp">
-      <Filter>Singleton</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraMath.h">
-      <Filter>3DMath</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>3DMath</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>3DMath</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>3DMath</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Singleton</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjFile.h">
-      <Filter>Singleton</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshObject.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FaceVertex.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

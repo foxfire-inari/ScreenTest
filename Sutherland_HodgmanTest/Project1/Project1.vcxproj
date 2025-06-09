@@ -139,21 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ObjFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraMath.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="FaceVertex.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="MeshObject.h" />
-    <ClInclude Include="ObjFile.h" />
-    <ClInclude Include="Quaternion.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
