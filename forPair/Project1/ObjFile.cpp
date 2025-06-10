@@ -113,14 +113,9 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 			{
 				//nとn+1番目の頂点で線分を作成
 				int startPoint = i;
-				int endPoint = i + 1;
+				int endPoint = (i + 1)%usedVertexIndex.size();
 
-				//n+1番目の頂点が最大値を超えたか
-				if (endPoint >= usedVertexIndex.size())
-				{
-					//最初の頂点を取得するようにする
-					endPoint = 0;
-				}
+
 
 				//fで指定されている数字は1から始まるので-1する
 				int startIndex	= usedVertexIndex.at(startPoint) - 1;

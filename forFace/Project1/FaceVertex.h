@@ -1,6 +1,7 @@
 #pragma once
 #include"Vector.h"
 #include"Common.h"
+#include"CameraMath.h"
 
 namespace 
 {
@@ -49,3 +50,23 @@ struct FaceVertex
 
 };
 
+/// <summary>
+/// 同次座標を行列で変換する関数
+/// </summary>
+/// <param name="_facevertex">フェース＜/param＞
+/// <param name="_mat">行列</param>
+/// <returns>変換後のフェース</returns>
+std::vector<Vector4D> TransformFace(const FaceVertex& _facevertex,const Matrix& _mat)
+{
+	std::vector<Vector4D> result;
+
+	//頂点情報をトランスフォーム
+	result.reserve(VERTEX_SIZE);
+	for (auto vertex : _facevertex.vertexs)
+	{
+		result.push_back(VEC4Transform({ vertex.x,vertex.y,vertex.z,1.0f }, _mat));
+	}
+	result.shrink_to_fit();
+
+	return result;
+}
