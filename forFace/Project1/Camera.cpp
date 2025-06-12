@@ -40,6 +40,72 @@ namespace
 		OUTVEC_NEAR
 	};
 
+	Vector4D intersect(const Vector4D& startClip, const Vector4D& endClip, OutVec outvec)
+	{
+		//クリップ後の座標
+		Vector4D result;
+
+		//矩形との交点が直線startClipendClipのどの範囲にあるか
+		//（0.0f<t<1.0f）の場合は線分startClipendClipのどこか
+		float t = 0.0f;
+
+		//線分の方向ベクトル
+		Vector4D direction = {
+			endClip.x - startClip.x,
+			endClip.y - startClip.y,
+			endClip.z - startClip.z,
+			endClip.w - startClip.w
+		};
+		//割り算の分母
+		float denominator;
+
+		switch (outvec)
+		{
+		case LEFT:
+			denominator = direction.x + direction.w;
+			if (std::fabsf(denominator) < 1e-6f) { return false; }
+			t = (-startClip.x - startClip.w) / denominator;
+			break;
+		case RIGHT:
+			denominator = direction.x - direction.w;
+			if (std::fabsf(denominator) < 1e-6f) { return false; }
+			t = (startClip.x - startClip.w) / denominator;
+			break;
+		case BOTTOM:
+			denominator = direction.y + direction.w;
+			if (std::fabsf(denominator) < 1e-6f) { return false; }//ここ関数化したい
+			t = (-startClip.y - startClip.w) / denominator;
+			break;
+		case TOP:
+			denominator = direction.y - direction.w;
+			if (std::fabsf(denominator) < 1e-6f) { return false; }
+			t = (startClip.w - startClip.y) / denominator;
+			break;
+		case OUTVEC_NEAR:
+			//ここだけ0z<=0なので処理がわずかに違う
+			if (std::fabsf(direction.z) < 1e-6f) { return false; }
+			t = -startClip.z / direction.z;
+			break;
+		case OUTVEC_FAR:
+			denominator = direction.z - direction.w;
+			if (std::fabsf(denominator) < 1e-6f) { return false; }
+			t = (startClip.w - startClip.z) / denominator;
+			break;
+		default:
+			assert(false);
+		}
+
+		//tが線分上の範囲にない場合は計算をしない
+		if (t < 0.0f || t>1.0f) { return false; }
+
+		//交点の座標を計算
+		result = VectorLerp4D(startClip, endClip, t);
+
+		return result;
+
+	}
+
+
 	/// <summary>
 	/// 内側にあるか
 	/// </summary>
@@ -80,13 +146,20 @@ namespace
 			bool startIn = inside(startvertex, outvec);
 			bool endIn   = inside(endvertex, outvec);
 
-
-			//--------------------次はここから始める
-
-
-
-
-
+			if (startIn && endIn)
+			{
+				result.push_back(endvertex);
+			}
+			else if (startIn && !endIn)
+			{
+				result.push_back(intersect(startvertex, endvertex, outvec));
+			}
+			else if (!startIn && endIn)
+			{
+				result.push_back(intersect(startvertex, endvertex, outvec));
+				result.push_back(endvertex);
+			}
+			return result;
 		}
 
 	}
@@ -111,7 +184,26 @@ namespace
 
 	}
 
+	FaceVertex ChangeNDC(std::vector<Vector4D> face)
+	{
+		//---------------次はここから
+	}
 
+
+
+
+	std::vector<FaceVertex> Triangulate(const FaceVertex& face)
+	{
+		std::vector<FaceVertex> result;
+
+		if (face.vertexs.size() < 3)return result;
+
+		for (int i = 1; i + 1 < face.vertexs.size(); ++i)
+		{
+			FaceVertex triangle = { { face.vertexs[0],face.vertexs[i],face.vertexs[i + 1] },face.normalVer };
+			result.push_back(triangle);
+		}
+	}
 
 
 	//Sutherland-Hodgmanアルゴリズム終了-------
@@ -163,38 +255,44 @@ void Camera::Draw(std::list<MeshObject> worldObjects)
 		//オブジェクトの面を一面ずつ取得
 		for (const auto& face : object.faceVertexs)
 		{
-			std::vector<Vector4D> Clippedface = TransformFace(face,viewProjMatrix);
+			std::vector<Vector4D> TransformedFace = TransformFace(face,viewProjMatrix);
+
+			std::vector<Vector4D> ClipedFace = sutherlandHodgmanClip(TransformedFace);
+
+			FaceVertex NDCFace = ChangeNDC(ClipedFace);
+			
+			std::vector<FaceVertex> triangles = Triangulate(NDCFace);
 
 			// Cohen-Sutherlandアルゴリズムで線分をクリッピング
-			if (ClipLineCohenSutherland(startClipped, endClipped))
-			{
-				//線分が視錐台内に残った時のみ動く
-
-				//NDC座標とスクリーン座標を計算
-
-				//NDC座標用
-				Vector3D startNDC, endNDC;
-
-				//パースペクティブ除算の前に０除算防止
-				if (fabsf(startClipped.w) > 1e-6f && fabsf(endClipped.w) > 1e-6f)
-				{
-					startNDC = { startClipped.x / startClipped.w,  startClipped.y / startClipped.w ,  startClipped.z / startClipped.w };
-					endNDC = { endClipped.x / endClipped.w,    endClipped.y / endClipped.w ,  endClipped.z / endClipped.w };
-
-					//NDC座標をスクリーン座標（int）に変換
-					float heafWidth = WINDOW_WIDTH / 2.0f;
-					float heafHeight = WINDOW_HEIGHT / 2.0f;
-
-					int startX = static_cast<int>(startNDC.x * heafWidth + heafWidth);
-					int startY = static_cast<int>(-startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
-					int endX = static_cast<int>(endNDC.x * heafWidth + heafWidth);
-					int endY = static_cast<int>(-endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
-
-					//線の描画はDxlibの関数
-					DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
-
-				}
-			}
+			//if (ClipLineCohenSutherland(startClipped, endClipped))
+			//{
+			//	//線分が視錐台内に残った時のみ動く
+			//
+			//	//NDC座標とスクリーン座標を計算
+			//
+			//	//NDC座標用
+			//	Vector3D startNDC, endNDC;
+			//
+			//	//パースペクティブ除算の前に０除算防止
+			//	if (fabsf(startClipped.w) > 1e-6f && fabsf(endClipped.w) > 1e-6f)
+			//	{
+			//		startNDC = { startClipped.x / startClipped.w,  startClipped.y / startClipped.w ,  startClipped.z / startClipped.w };
+			//		endNDC = { endClipped.x / endClipped.w,    endClipped.y / endClipped.w ,  endClipped.z / endClipped.w };
+			//
+			//		//NDC座標をスクリーン座標（int）に変換
+			//		float heafWidth = WINDOW_WIDTH / 2.0f;
+			//		float heafHeight = WINDOW_HEIGHT / 2.0f;
+			//
+			//		int startX = static_cast<int>(startNDC.x * heafWidth + heafWidth);
+			//		int startY = static_cast<int>(-startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+			//		int endX = static_cast<int>(endNDC.x * heafWidth + heafWidth);
+			//		int endY = static_cast<int>(-endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
+			//
+			//		//線の描画はDxlibの関数
+			//		DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
+			//
+			//	}
+			//}
 		}
 	}
 }
