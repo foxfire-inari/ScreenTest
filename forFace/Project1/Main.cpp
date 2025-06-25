@@ -5,48 +5,6 @@
 #include "FaceVertex.h"
 #include "MeshObject.h"
 
-/// <summary>
-/// キューブ状のオブジェクトを作る関数
-/// </summary>
-/// <param name="size"></param>
-/// <param name="center"></param>
-/// <returns></returns>
-//MeshObject CreateCuveObject(float size, const Vector3D& center)
-//{
-//    MeshObject result;
-//    //centerを中心にするため
-//    float halfSize = size * 0.5f;
-//
-//    //直方体の長点は8つ
-//    Vector3D vertices[8] =
-//    {
-//        //それぞれCをなぞるイメージ
-//        center + Vector3D{  halfSize, halfSize, halfSize},
-//        center + Vector3D{ -halfSize, halfSize, halfSize},
-//        center + Vector3D{ -halfSize,-halfSize, halfSize},
-//        center + Vector3D{  halfSize,-halfSize, halfSize},
-//
-//        center + Vector3D{  halfSize, halfSize,-halfSize},
-//        center + Vector3D{ -halfSize, halfSize,-halfSize},
-//        center + Vector3D{ -halfSize,-halfSize,-halfSize},
-//        center + Vector3D{  halfSize,-halfSize,-halfSize}
-//
-//    };
-//    int edges[12][2] =
-//    {
-//        {0, 1}, {1, 2}, {2, 3}, {3, 0},
-//        {4, 5}, {5, 6}, {6, 7}, {7, 4},
-//        {0, 4}, {1, 5}, {2, 6}, {3, 7}
-//    };
-//    for (const auto& edge : edges)
-//    {
-//        FaceVertex _vertexPair(vertices[edge[0]], vertices[edge[1]]);
-//        result.faceVertexs.push_back(_vertexPair);
-//    }
-//    return result;
-//}
-
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     // ウィンドウモードに設定
@@ -68,10 +26,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     //要素の削除を効率よくするためlistにする
     std::list<MeshObject> worldObjects = {};
-
-    //キューブを作成＆保存
-    //MeshObject cube = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
-    //worldObjects.emplace_back(cube);
 
     //モデルを読み込むシングルトンクラスを作成
     ObjFile::Create();

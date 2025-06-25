@@ -69,7 +69,7 @@ namespace
 		case RIGHT:
 			denominator = direction.x - direction.w;
 			if (std::fabsf(denominator) < 1e-6f) { return false; }
-			t = (startClip.x - startClip.w) / denominator;
+			t = (startClip.w - startClip.x) / denominator;
 			break;
 		case BOTTOM:
 			denominator = direction.y + direction.w;
@@ -116,12 +116,12 @@ namespace
 	{
 		switch (outvec)
 		{
-		case LEFT:			return p.x < -p.w;
-		case RIGHT:			return p.x >  p.w;
-		case BOTTOM:		return p.y < -p.w;
-		case TOP:			return p.y >  p.w;
-		case OUTVEC_NEAR:	return p.z < -p.w;
-		case OUTVEC_FAR:	return p.z >  p.w;
+		case LEFT:			return p.x > -p.w;
+		case RIGHT:			return p.x <  p.w;
+		case BOTTOM:		return p.y > -p.w;
+		case TOP:			return p.y <  p.w;
+		case OUTVEC_NEAR:	return p.z > -p.w;
+		case OUTVEC_FAR:	return p.z <  p.w;
 		}
 		return false;
 	}
@@ -159,8 +159,8 @@ namespace
 				result.push_back(intersect(startvertex, endvertex, outvec));
 				result.push_back(endvertex);
 			}
-			return result;
 		}
+		return result;
 
 	}
 
@@ -177,16 +177,24 @@ namespace
 		//各クリップ面で線分を処理
 		for (OutVec e : {LEFT, RIGHT, BOTTOM, TOP, OUTVEC_FAR, OUTVEC_NEAR})
 		{
+			if (result.size() == 0)return result;
 			result = clipEdge(result, e);
 		}
 		return result;
-
-
 	}
 
 	FaceVertex ChangeNDC(std::vector<Vector4D> face)
 	{
-		//---------------次はここから
+		FaceVertex result;
+
+		Vector3D vec;
+
+		for (int i = 0; i < face.size(); i++)
+		{
+			vec = { face[i].x / face[i].w,face[i].y / face[i].w,face[i].z / face[i].w };
+			result.vertexs.push_back(vec);
+		}
+		return result;
 	}
 
 
@@ -259,40 +267,27 @@ void Camera::Draw(std::list<MeshObject> worldObjects)
 
 			std::vector<Vector4D> ClipedFace = sutherlandHodgmanClip(TransformedFace);
 
+			if (ClipedFace.size() == 0)continue;
+
 			FaceVertex NDCFace = ChangeNDC(ClipedFace);
 			
 			std::vector<FaceVertex> triangles = Triangulate(NDCFace);
 
-			// Cohen-Sutherlandアルゴリズムで線分をクリッピング
-			//if (ClipLineCohenSutherland(startClipped, endClipped))
-			//{
-			//	//線分が視錐台内に残った時のみ動く
-			//
-			//	//NDC座標とスクリーン座標を計算
-			//
-			//	//NDC座標用
-			//	Vector3D startNDC, endNDC;
-			//
-			//	//パースペクティブ除算の前に０除算防止
-			//	if (fabsf(startClipped.w) > 1e-6f && fabsf(endClipped.w) > 1e-6f)
-			//	{
-			//		startNDC = { startClipped.x / startClipped.w,  startClipped.y / startClipped.w ,  startClipped.z / startClipped.w };
-			//		endNDC = { endClipped.x / endClipped.w,    endClipped.y / endClipped.w ,  endClipped.z / endClipped.w };
-			//
-			//		//NDC座標をスクリーン座標（int）に変換
-			//		float heafWidth = WINDOW_WIDTH / 2.0f;
-			//		float heafHeight = WINDOW_HEIGHT / 2.0f;
-			//
-			//		int startX = static_cast<int>(startNDC.x * heafWidth + heafWidth);
-			//		int startY = static_cast<int>(-startNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
-			//		int endX = static_cast<int>(endNDC.x * heafWidth + heafWidth);
-			//		int endY = static_cast<int>(-endNDC.y * heafHeight + heafHeight);//描画上Yを逆にする
-			//
-			//		//線の描画はDxlibの関数
-			//		DrawLine(startX, startY, endX, endY, GetColor(255, 255, 255));
-			//
-			//	}
-			//}
+			for (const auto& triangle : triangles)
+			{
+				//NDC座標をスクリーン座標（int）に変換
+				float heafWidth = WINDOW_WIDTH / 2.0f;
+				float heafHeight = WINDOW_HEIGHT / 2.0f;
+
+				int startvertexX = static_cast<int>(triangle.vertexs[0].x * heafWidth  + heafWidth );
+				int startvertexY = static_cast<int>(-triangle.vertexs[0].y * heafHeight + heafHeight);
+				int midvertexX = static_cast<int>(triangle.vertexs[1].x * heafWidth + heafWidth);
+				int midvertexY = static_cast<int>(-triangle.vertexs[1].y * heafHeight + heafHeight);
+				int endvertexX = static_cast<int>(triangle.vertexs[2].x * heafWidth + heafWidth);
+				int endvertexY = static_cast<int>(-triangle.vertexs[2].y * heafHeight + heafHeight);
+
+				DrawTriangle(startvertexX, startvertexY, midvertexX, midvertexY, endvertexX, endvertexY, GetColor(255, 255, 255), true);
+			}
 		}
 	}
 }

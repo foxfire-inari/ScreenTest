@@ -81,9 +81,9 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 			Vector3D vec;
 
 			//‡”Ô‚Éæ“¾
-			vec.x = stof(strvec.at(1))*100;
-			vec.y = stof(strvec.at(2))*100;
-			vec.z = stof(strvec.at(3))*100;
+			vec.x = stof(strvec.at(1))*10;
+			vec.y = stof(strvec.at(2))*10;
+			vec.z = stof(strvec.at(3))*10;
 
 			//’¸“_À•W‚ğ’Ç‰Á
 			vertexSource.push_back(vec);

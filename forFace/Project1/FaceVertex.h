@@ -56,7 +56,7 @@ struct FaceVertex
 /// <param name="_facevertex">フェース＜/param＞
 /// <param name="_mat">行列</param>
 /// <returns>変換後のフェース</returns>
-std::vector<Vector4D> TransformFace(const FaceVertex& _facevertex,const Matrix& _mat)
+static std::vector<Vector4D> TransformFace(const FaceVertex& _facevertex,const Matrix& _mat)
 {
 	std::vector<Vector4D> result;
 
