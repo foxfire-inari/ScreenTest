@@ -149,11 +149,12 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="FaceVertex.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="MeshObject.h" />
+    <ClInclude Include="FaceObject.h" />
     <ClInclude Include="ObjFile.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="SutherlandHodgman.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

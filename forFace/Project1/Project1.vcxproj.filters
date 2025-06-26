@@ -52,11 +52,14 @@
     <ClInclude Include="ObjFile.h">
       <Filter>Singleton</Filter>
     </ClInclude>
-    <ClInclude Include="MeshObject.h">
+    <ClInclude Include="FaceObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="FaceVertex.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SutherlandHodgman.h">
+      <Filter>3DMath</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

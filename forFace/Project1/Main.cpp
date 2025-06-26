@@ -3,7 +3,7 @@
 #include "Camera.h"
 #include "ObjFile.h"
 #include "FaceVertex.h"
-#include "MeshObject.h"
+#include "FaceObject.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -25,33 +25,32 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     SetDrawScreen(DX_SCREEN_BACK);
 
     //要素の削除を効率よくするためlistにする
-    std::list<MeshObject> worldObjects = {};
+    std::list<FaceObject> worldObjects = {};
 
     //モデルを読み込むシングルトンクラスを作成
     ObjFile::Create();
     
-    //剣のモデルを読み込む
-    MeshObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
+    //剣のモデルを読み込む--------------三角形で無いオブジェクトの描画
+    FaceObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
     worldObjects.emplace_back(modelSword);
     
-    //ミクさんを読み込む
-    //MeshObject modelmiku = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
+    //ミクさんを読み込む--------------膨大な頂点を持つオブジェクトの描画（主に読み込み速度のテスト用）
+    //FaceObject modelmiku = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
     //worldObjects.emplace_back(modelmiku);
 
-    //ガチャガチャを読み込む
-    //MeshObject modelGacya = ObjFile::GetInstance()->LoadModel("3DModel/Gacya.obj");
+    //ガチャガチャを読み込む--------------ネット上にないモデルの描画（万が一の状況がないかの確認）
+    //FaceObject modelGacya = ObjFile::GetInstance()->LoadModel("3DModel/Gacya.obj");
     //worldObjects.emplace_back(modelGacya);
 
-    //木を読み込む
-    //MeshObject modelTree = ObjFile::GetInstance()->LoadModel("3DModel/Tree.obj");
+    //木を読み込む--------------非常に頂点が密集している状況下でのテスト用
+    //FaceObject modelTree = ObjFile::GetInstance()->LoadModel("3DModel/Tree.obj");
     //worldObjects.emplace_back(modelTree);
 
-
+    //読み込み終わったら削除
     ObjFile::Destroy();
 
+    //カメラオブジェクトを生成
     Camera* camera = new Camera();
-
-    //TopAngle* topangle = new TopAngle(camera);
 
     // ウインドウが閉じられるかエスケープキーが押されるまでループ
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -59,17 +58,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // 画面をクリア
         ClearDrawScreen();
 
+        //カメラの更新処理
         camera->Update();
-
+        //描画処理
         camera->Draw(worldObjects);
-
-        //topangle->Draw(worldLine);
 
         // 裏画面の内容を表画面に反映
         ScreenFlip();
     }
-
-    ObjFile::Destroy();
 
     // ＤＸライブラリの後始末
     DxLib_End();

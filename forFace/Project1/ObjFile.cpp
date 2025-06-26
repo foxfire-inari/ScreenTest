@@ -1,5 +1,5 @@
 #include "ObjFile.h"
-#include "MeshObject.h"
+#include "FaceObject.h"
 #include "FaceVertex.h"
 #include <iostream>
 #include <fstream>
@@ -14,6 +14,9 @@ namespace
 	static const int LINE_ELEMENT = 50000;
 	//面の頂点のおおよその最大数
 	static const int FACE_INDEX_ELEMENT = 5;
+
+	//オブジェクトの倍率
+	static const int SCALE = 10;
 }
 
 ObjFile* ObjFile::Singleton::instance = nullptr;
@@ -26,9 +29,9 @@ ObjFile::~ObjFile()
 {
 }
 
-MeshObject ObjFile::LoadModel(const char* fileName)
+FaceObject ObjFile::LoadModel(const char* fileName)
 {
-	MeshObject result = MeshObject(LINE_ELEMENT);
+	FaceObject result = FaceObject(LINE_ELEMENT);
 
 	//ファイルからの入力を得るためにifstreamを使用
 	std::ifstream ifs(fileName);
@@ -81,9 +84,9 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 			Vector3D vec;
 
 			//順番に取得
-			vec.x = stof(strvec.at(1))*10;
-			vec.y = stof(strvec.at(2))*10;
-			vec.z = stof(strvec.at(3))*10;
+			vec.x = stof(strvec.at(1))*SCALE;
+			vec.y = stof(strvec.at(2))*SCALE;
+			vec.z = stof(strvec.at(3))*SCALE;
 
 			//頂点座標を追加
 			vertexSource.push_back(vec);

@@ -4,13 +4,13 @@
 #include "Matrix.h"
 #include "Quaternion.h"
 
-struct MeshObject;
+struct FaceObject;
 class Camera
 {
 public:
 	Camera();
 	~Camera();
-	void Draw(std::list<MeshObject> worldObjects);
+	void Draw(std::list<FaceObject> worldObjects);
 	void Update();
 
 	Vector3D GetPosition() { return position; }
