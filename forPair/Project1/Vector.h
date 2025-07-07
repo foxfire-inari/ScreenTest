@@ -60,10 +60,10 @@ struct Vector3D
 	{
 		//自身の長さを取得
 		float length = Length();
-
+		
 		//float型が正確に表現できる桁（23ビット≒7桁）
 		//非常に小さい値より大きいかを確認してから計算する（０除算をしないため）
-		if (length > 1e-6f)
+		if (length > NEAR_ZERO)
 		{
 			//除算と乗算では除算の方が負荷が大きいため、逆数を取得しておく
 			float invLen = 1.0f / length;

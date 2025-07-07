@@ -14,6 +14,9 @@ namespace
 	static const int LINE_ELEMENT = 50000;
 	//多角形のおおよその最大数
 	static const int FACE_INDEX_ELEMENT = 5;
+
+	//オブジェクトの倍率
+	static const int SCALE = 10;
 }
 
 ObjFile* ObjFile::Singleton::instance = nullptr;
@@ -81,9 +84,9 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 			Vector3D vec;
 
 			//順番に取得
-			vec.x = stof(strvec.at(1))*100;
-			vec.y = stof(strvec.at(2))*100;
-			vec.z = stof(strvec.at(3))*100;
+			vec.x = stof(strvec.at(1))*SCALE;
+			vec.y = stof(strvec.at(2))*SCALE;
+			vec.z = stof(strvec.at(3))*SCALE;
 
 			//頂点座標を追加
 			vertexSource.push_back(vec);
@@ -113,9 +116,14 @@ MeshObject ObjFile::LoadModel(const char* fileName)
 			{
 				//nとn+1番目の頂点で線分を作成
 				int startPoint = i;
-				int endPoint = (i + 1)%usedVertexIndex.size();
+				int endPoint = i + 1;
 
-
+				//n+1番目の頂点が最大値を超えたか
+				if (endPoint >= usedVertexIndex.size())
+				{
+					//最初の頂点を取得するようにする
+					endPoint = 0;
+				}
 
 				//fで指定されている数字は1から始まるので-1する
 				int startIndex	= usedVertexIndex.at(startPoint) - 1;

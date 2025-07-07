@@ -21,4 +21,6 @@ namespace
     //視点からスクリーンまでの距離
     static const float SCREEN = 500.f;
 
+    //フロートを0fとして扱う範囲
+    static const float NEAR_ZERO = NEAR_ZERO;
 }

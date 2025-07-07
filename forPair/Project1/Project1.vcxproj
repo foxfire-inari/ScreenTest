@@ -131,7 +131,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -146,8 +146,8 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraMath.h" />
+    <ClInclude Include="ChohenSutherland.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="FaceVertex.h" />
     <ClInclude Include="LineVertex.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MeshObject.h" />

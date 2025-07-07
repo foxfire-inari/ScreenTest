@@ -6,11 +6,11 @@
 #include "MeshObject.h"
 
 /// <summary>
-/// キューブ状のラインを作る関数
+/// キューブ状のラインを作る関数(メッシュ表示のテスト用)
 /// </summary>
-/// <param name="size"></param>
-/// <param name="center"></param>
-/// <returns></returns>
+/// <param name="size">一辺の長さ</param>
+/// <param name="center">中心座標</param>
+/// <returns>メッシュで構成されたオブジェクト</returns>
 MeshObject CreateCuveLines(float size, const Vector3D& center)
 {
     MeshObject result;
@@ -69,35 +69,35 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     //要素の削除を効率よくするためlistにする
     std::list<MeshObject> worldObjects = {};
 
-    //キューブを作成＆保存
+    //キューブを作成＆保存--------------メッシュ表示のテスト用
     //MeshObject cube = CreateCuveLines(50.f, { 0.0f,0.0f,50.0f });
     //worldObjects.emplace_back(cube);
 
     //モデルを読み込むシングルトンクラスを作成
     ObjFile::Create();
     
-    //剣のモデルを読み込む
+    //剣のモデルを読み込む--------------三角形で無いオブジェクトの描画
     //MeshObject modelSword = ObjFile::GetInstance()->LoadModel("3DModel/Sting-Sword-lowpoly.obj");
     //worldObjects.emplace_back(modelSword);
     
-    //ミクさんを読み込む
+    //ミクさんを読み込む--------------膨大な頂点を持つオブジェクトの描画（主に読み込み速度のテスト用）
     MeshObject modelmiku = ObjFile::GetInstance()->LoadModel("3DModel/miku.obj");
     worldObjects.emplace_back(modelmiku);
 
-    //ガチャガチャを読み込む
+    //ガチャガチャを読み込む--------------ネット上にないモデルの描画（万が一の状況がないかの確認）
     //MeshObject modelGacya = ObjFile::GetInstance()->LoadModel("3DModel/Gacya.obj");
     //worldObjects.emplace_back(modelGacya);
 
-    //木を読み込む
+    //木を読み込む--------------非常に頂点が密集している状況下でのテスト用
     //MeshObject modelTree = ObjFile::GetInstance()->LoadModel("3DModel/Tree.obj");
     //worldObjects.emplace_back(modelTree);
 
 
+    //読み込み終わったら削除
     ObjFile::Destroy();
 
+    //カメラオブジェクトを生成
     Camera* camera = new Camera();
-
-    //TopAngle* topangle = new TopAngle(camera);
 
     // ウインドウが閉じられるかエスケープキーが押されるまでループ
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -105,17 +105,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // 画面をクリア
         ClearDrawScreen();
 
+        //カメラの更新処理
         camera->Update();
-
+        //描画処理
         camera->Draw(worldObjects);
-
-        //topangle->Draw(worldLine);
 
         // 裏画面の内容を表画面に反映
         ScreenFlip();
     }
-
-    ObjFile::Destroy();
 
     // ＤＸライブラリの後始末
     DxLib_End();

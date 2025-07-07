@@ -45,3 +45,21 @@ inline Vector4D VEC4Transform(const Vector4D& _vec, const Matrix& _mat)
 
     return result;
 }
+
+/// <summary>
+/// 4Dベクトル start から end へ、パラメータ t (0.0～1.0) を使って線形補間するインライン関数 
+///（クリッピングで交点を計算する際に使用する）
+/// </summary>
+/// <param name="start">開始位置</param>
+/// <param name="end">終了位置</param>
+/// <param name="t">進行度</param>
+/// <returns>4Dベクトル</returns>
+inline Vector4D VectorLerp4D(const Vector4D& start, const Vector4D& end, float t)
+{
+	return {
+		start.x + (end.x - start.x) * t,
+		start.y + (end.y - start.y) * t,
+		start.z + (end.z - start.z) * t,
+		start.w + (end.w - start.w) * t
+	};
+}

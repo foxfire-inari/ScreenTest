@@ -58,8 +58,8 @@
     <ClInclude Include="LineVertex.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="FaceVertex.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="ChohenSutherland.h">
+      <Filter>3DMath</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
